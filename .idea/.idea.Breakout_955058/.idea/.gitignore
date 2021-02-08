@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.Breakout_955058.iml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../:\Users\Ivan Andreev\Desktop\uni\CSC384_Video_Games\projects\Breakout_955058\.idea\.idea.Breakout_955058\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
