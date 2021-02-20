@@ -33,27 +33,40 @@ public class BallMovement2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveBall();
+    }
+
+    private void MoveBall()
+    {
         Vector2 toMove = _movementDirection * (speed * Time.deltaTime);
         Vector3 newPos = new Vector3(toMove.x, toMove.y, 0) + transform.position;
 
-        if (Math.Abs(newPos.y) >= _bottomTop)
+        if (Math.Abs(newPos.x) >= _leftRight)
+        {
+            _movementDirection.x *= -1;
+        }
+        else if (newPos.y >= _bottomTop)
         {
             _movementDirection.y *= -1;
         }
-        else if (Math.Abs(newPos.x) >= _leftRight)
+        else if (newPos.y <= -_bottomTop)
         {
-            _movementDirection.x *= -1;
+            // todo1: Dead
+            _movementDirection.y *= -1;
         }
         else
         {
             transform.position = newPos;
         }
     }
-    
-    
-    public void MoveBall()
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Set movement: " + _movementDirection);
+        Debug.Log("Collision");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _movementDirection.y *= -1;
+            Debug.Log("Booom");
+        }
     }
-   
 }
