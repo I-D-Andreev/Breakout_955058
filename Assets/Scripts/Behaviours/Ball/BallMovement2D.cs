@@ -24,8 +24,8 @@ public class BallMovement2D : MonoBehaviour
         float screenHeight = Camera.main.orthographicSize;
         float screenWidth = screenHeight * Camera.main.aspect;
 
-        _bottomTop = screenHeight - (_boxCollider.size.y / 2);
-        _leftRight = screenWidth - (_boxCollider.size.x / 2);
+        _bottomTop = screenHeight - (_boxCollider.bounds.size.y / 2);
+        _leftRight = screenWidth - (_boxCollider.bounds.size.x / 2);
     }
 
     
