@@ -60,13 +60,10 @@ public class BallMovement2D : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collision");
-        if (other.gameObject.CompareTag("Player"))
-        {
-            _movementDirection.y *= -1;
-            Debug.Log("Booom");
-        }
+        _movementDirection.y *= -1;
     }
+    
 }
