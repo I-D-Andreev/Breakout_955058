@@ -2,68 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class BallMovement2D : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
-
-    private Vector2 _movementDirection;
-    private BoxCollider2D _boxCollider;
-
-    private float _leftRight;
-    private float _bottomTop;
+    private Vector2 _movement = new Vector2(0, -1);
+    private Rigidbody2D _rigidbody2D;
     
     
     private void Awake()
     {
-        _boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        _movementDirection = new Vector2(-1, -1);
-
-        float screenHeight = Camera.main.orthographicSize;
-        float screenWidth = screenHeight * Camera.main.aspect;
-
-        _bottomTop = screenHeight - (_boxCollider.bounds.size.y / 2);
-        _leftRight = screenWidth - (_boxCollider.bounds.size.x / 2);
+        _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    
-    
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        MoveBall();
+        _rigidbody2D.velocity = _movement * speed;
     }
 
-    private void MoveBall()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Vector2 toMove = _movementDirection * (speed * Time.deltaTime);
-        Vector3 newPos = new Vector3(toMove.x, toMove.y, 0) + transform.position;
-
-        if (Math.Abs(newPos.x) >= _leftRight)
-        {
-            _movementDirection.x *= -1;
-        }
-        else if (newPos.y >= _bottomTop)
-        {
-            _movementDirection.y *= -1;
-        }
-        else if (newPos.y <= -_bottomTop)
-        {
-            // todo1: Dead
-            _movementDirection.y *= -1;
-        }
-        else
-        {
-            transform.position = newPos;
-        }
+        Debug.Log("Collision");
     }
-
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        _movementDirection.y *= -1;
-    }
-    
 }
