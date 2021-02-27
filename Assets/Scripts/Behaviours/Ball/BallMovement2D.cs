@@ -8,7 +8,7 @@ using UnityEngine;
 public class BallMovement2D : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
-    private Vector2 _movement = new Vector2(0, -1);
+    [SerializeField] private Vector2 _movement = new Vector2(-1, 1);
     private Rigidbody2D _rigidbody2D;
     
     
