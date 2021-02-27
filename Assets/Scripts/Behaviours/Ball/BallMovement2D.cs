@@ -8,7 +8,7 @@ using UnityEngine;
 public class BallMovement2D : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
-    [SerializeField] private Vector2 _movement = new Vector2(-1, 1);
+    [SerializeField] private Vector2 movement = new Vector2(-1, 1);
     private Rigidbody2D _rigidbody2D;
     
     
@@ -19,11 +19,7 @@ public class BallMovement2D : MonoBehaviour
 
     private void Start()
     {
-        _rigidbody2D.velocity = _movement * speed;
+        _rigidbody2D.velocity = movement * speed;
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("Collision");
-    }
+    
 }
