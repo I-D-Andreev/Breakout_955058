@@ -18,6 +18,8 @@ public class TileManager : MonoBehaviour
         CreateTilesRect();
     }
 
+
+
     private void CreateTilesRect()
     {
   
@@ -29,29 +31,20 @@ public class TileManager : MonoBehaviour
 
         float startHeight = WorldSize.RelativeHeight() - tileHeightPadded/2 - worldPaddingTop;
         float endHeight = 0f; // middle of screen
+
+        float totalWidth = endWidth - startWidth;
+        float totalHeight = Math.Abs(endHeight - startHeight);
         
-        Debug.Log("World width: " + WorldSize.RelativeWidth());
-        Debug.Log("World height: " + WorldSize.RelativeHeight());
+        int possibleColumns = (int)(totalWidth / tileWidthPadded);
+        int possibleRows = (int)(totalHeight / tileHeightPadded);
         
-        Debug.Log("Start width: " + startWidth);
-        Debug.Log("Start height: " + startHeight);
-        
-        Debug.Log("World padding side: " + worldPaddingSide);
-        Debug.Log("World padding top: " + worldPaddingTop);
-
-  
-
-        int possibleColumns = (int)((endWidth - startWidth) / tileWidthPadded);
-        int possibleRows = (int)(Math.Abs(endHeight - startHeight) / tileHeightPadded);
-
-
-        int numTilesCopy = numberOfTiles;
         // recalculate padding so that tiles are centered
-        //todo1
-
-        float tilePositionX = startWidth;
+        float widthOffset = (totalWidth - possibleColumns * tileWidthPadded) /2;
+        
+        float tilePositionX = startWidth + widthOffset + tileWidthPadded/2; // as tiles are rendered from middle
         float tilePositionY = startHeight;
 
+        int numTilesCopy = numberOfTiles;
         for (int i = 0; i < possibleRows; i++)
         {
             if (numTilesCopy == 0)
@@ -73,7 +66,7 @@ public class TileManager : MonoBehaviour
                 numTilesCopy--;
             }
         }
+        
+        Debug.Log("Total tiles: " + tiles.Count);
     }
-    
-    
 }
