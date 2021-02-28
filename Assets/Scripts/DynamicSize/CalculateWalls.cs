@@ -10,8 +10,8 @@ public class CalculateWalls : MonoBehaviour
     private float _screenWidth;
     private void Awake()
     {
-        _screenHeight = Camera.main.orthographicSize;
-        _screenWidth = _screenHeight * Camera.main.aspect;
+        _screenHeight = WorldSize.RelativeHeight();
+        _screenWidth = WorldSize.RelativeWidth();
         
         // Walls
         Transform leftWall = transform.Find("Left");

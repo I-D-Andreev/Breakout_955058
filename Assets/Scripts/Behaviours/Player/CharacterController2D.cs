@@ -18,7 +18,7 @@ public class CharacterController2D : MonoBehaviour
     {
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         float platformWidth = _boxCollider.bounds.size.x / 2;
-        float screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        float screenWidth = WorldSize.RelativeWidth();
 
         _leftRightBounds = screenWidth - platformWidth;
     }

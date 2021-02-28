@@ -6,7 +6,8 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     [SerializeField] private int numberOfTiles = 10;
-    private List<Tile> tiles = new List<Tile>(); 
+    private List<Tile> tiles = new List<Tile>();
+    
     private void Awake()
     {
         
