@@ -5,22 +5,54 @@ using UnityEngine;
 
 public class Tile
 {
+    private static GameObject _tilePrefab = Resources.Load<GameObject>("Prefabs/Tile");
+    private static float _tileWidth ;
+    private static float _tileHeight;
+    private static bool _widthHeightInstantiated = false;
+    
+    
     private GameObject _tile;
     
-    private float Width { get; }
-    private float Height { get; }
     private Vector2 Position { get;  }
 
     public Tile(Vector2 position)
     {
-        GameObject tilePrefab = Resources.Load<GameObject>("Prefabs/Tile");
         Position = position;
-        _tile = GameObject.Instantiate(tilePrefab, new Vector3(Position.x, Position.y, 0), Quaternion.identity);
-    
-        Vector3 sizes = _tile.transform.localScale;
-        Vector2 sizeScale = _tile.GetComponent<SpriteRenderer>().size; 
-        
-        Width = sizes.x * sizeScale.x;
-        Height = sizes.y * sizeScale.y;
+        _tile = GameObject.Instantiate(_tilePrefab, new Vector3(Position.x, Position.y, 0), Quaternion.identity);
     }
+
+    public static float Width()
+    {
+        if (!_widthHeightInstantiated)
+        {
+            CalculateWidthHeight();
+        }
+
+        return _tileWidth;
+    }
+    
+    public static float Height()
+    {
+        if (!_widthHeightInstantiated)
+        {
+            CalculateWidthHeight();
+        }
+
+        return _tileHeight;
+    }
+
+
+
+    private static void  CalculateWidthHeight()
+    {
+        
+        Vector3 sizes = _tilePrefab.transform.localScale;
+        Vector2 sizesScale = _tilePrefab.GetComponent<SpriteRenderer>().size;
+
+        _tileWidth = sizes.x * sizesScale.x;
+        _tileHeight = sizes.y * sizesScale.y;
+        
+        _widthHeightInstantiated = true;
+    }
+    
 }
