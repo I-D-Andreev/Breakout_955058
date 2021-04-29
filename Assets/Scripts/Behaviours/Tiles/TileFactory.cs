@@ -5,18 +5,18 @@ using System;
 
 public class TileFactory
 {
-    private static GameObject tilePrefab;
+    private static GameObject _tilePrefab;
+    
+    private float _tileWidthPadded;
+    private float _tileHeightPadded;
 
-    // tile sizes
-    private static float tileWidth;
-    private static float tileHeight;
-    private static bool widthHeightInstantiated = false;
+    private float _startWidth;
+    private float _endWidth;
+    
+    private float _startHeight;
+    private float _endHeight;
 
-    // padding
-    private float tilePadding;
-    private float worldPaddingTop;
-    private float worldPaddingSide;
-
+    
     public enum TileFormation
     {
         Rectangle,
@@ -25,42 +25,30 @@ public class TileFactory
     public TileFactory(float tilePadding, float worldPaddingTop, float worldPaddingSide) : this("Prefabs/Tile", tilePadding,  worldPaddingTop, worldPaddingSide) { }
     public TileFactory(string prefabPath, float tilePadding, float worldPaddingTop, float worldPaddingSide)
     {
-        this.tilePadding = tilePadding;
-        this.worldPaddingTop = worldPaddingTop;
-        this.worldPaddingSide = worldPaddingSide;
+        _tilePrefab = Resources.Load<GameObject>(prefabPath);
+        (float tileWidth, float tileHeight) = CalculateWidthHeight();
+        
+        _tileWidthPadded = tileWidth + tilePadding;
+        _tileHeightPadded = tileHeight + tilePadding;
 
-        tilePrefab = Resources.Load<GameObject>(prefabPath);
+        // Usable world coordinates
+        _startWidth = -(WorldSize.RelativeWidth() - (_tileWidthPadded/2) - worldPaddingSide);
+        _endWidth = Math.Abs(_startWidth);
+        
+        _startHeight = WorldSize.RelativeHeight() - _tileHeightPadded/2 - worldPaddingTop;
+        _endHeight = 0f; // middle of screen
     }
 
 
-    public static float TileWidth()
-    {
-        if (!widthHeightInstantiated)
-        {
-            CalculateWidthHeight();
-        }
-
-        return tileWidth;
-    }
-    public static float TileHeight()
-    {
-        if (!widthHeightInstantiated)
-        {
-            CalculateWidthHeight();
-        }
-
-        return tileHeight;
-    }
-    private static void CalculateWidthHeight()
+    
+    private static (float,float) CalculateWidthHeight()
     {
 
-        Vector3 sizes = tilePrefab.transform.localScale;
-        Vector2 sizesScale = tilePrefab.GetComponent<SpriteRenderer>().size;
+        Vector3 sizes = _tilePrefab.transform.localScale;
+        Vector2 sizesScale = _tilePrefab.GetComponent<SpriteRenderer>().size;
 
-        tileWidth = sizes.x * sizesScale.x;
-        tileHeight = sizes.y * sizesScale.y;
-
-        widthHeightInstantiated = true;
+        // (tileWidth, tileHeight)
+        return (sizes.x * sizesScale.x, sizes.y * sizesScale.y);
     }
 
     public int CreateTiles(TileFactory.TileFormation tileFormation)
@@ -77,26 +65,17 @@ public class TileFactory
     // Create Tiles in a Rectangle
     private int CreateTilesRect()
     {
-        float tileWidthPadded = TileWidth() + tilePadding;
-        float tileHeightPadded = TileHeight() + tilePadding;
-
-        float startWidth = -(WorldSize.RelativeWidth() - (tileWidthPadded/2) - worldPaddingSide);
-        float endWidth = Math.Abs(startWidth);
-
-        float startHeight = WorldSize.RelativeHeight() - tileHeightPadded/2 - worldPaddingTop;
-        float endHeight = 0f; // middle of screen
-
-        float totalWidth = endWidth - startWidth;
-        float totalHeight = Math.Abs(endHeight - startHeight);
+        float totalWidth = _endWidth - _startWidth;
+        float totalHeight = Math.Abs(_endHeight - _startHeight);
         
-        int possibleColumns = (int)(totalWidth / tileWidthPadded);
-        int possibleRows = (int)(totalHeight / tileHeightPadded);
+        int possibleColumns = (int)(totalWidth / _tileWidthPadded);
+        int possibleRows = (int)(totalHeight / _tileHeightPadded);
         
         // recalculate padding so that tiles are centered
-        float widthOffset = (totalWidth - possibleColumns * tileWidthPadded) /2;
+        float widthOffset = (totalWidth - possibleColumns * _tileWidthPadded) /2;
         
-        float tilePositionX = startWidth + widthOffset + tileWidthPadded/2; // as tiles are rendered from middle
-        float tilePositionY = startHeight;
+        float tilePositionX = _startWidth + widthOffset + _tileWidthPadded/2; // as tiles are rendered from middle
+        float tilePositionY = _startHeight;
 
         int tilesCount = 0;
         for (int i = 0; i < possibleRows; i++)
@@ -105,8 +84,8 @@ public class TileFactory
             for (int j = 0; j < possibleColumns; j++)
             {
 
-                float posX = tilePositionX + j * tileWidthPadded;
-                float posY = tilePositionY - i * tileHeightPadded;
+                float posX = tilePositionX + j * _tileWidthPadded;
+                float posY = tilePositionY - i * _tileHeightPadded;
                 
                 CreateTile(posX, posY);
                 tilesCount++;
@@ -118,9 +97,9 @@ public class TileFactory
         return tilesCount;
     }
 
-
-    private GameObject CreateTile(float posX, float posY) {
-        return GameObject.Instantiate(tilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
+    
+    private void CreateTile(float posX, float posY) {
+        GameObject.Instantiate(_tilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
     }
 
 }
