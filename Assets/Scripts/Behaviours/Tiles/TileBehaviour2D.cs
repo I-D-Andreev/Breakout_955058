@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileBehaviour2D : MonoBehaviour
 {
-    private int _numStrikesToDisappear = 1;
-    private int _numStrikesLeft = 1;
-    private void OnCollisionExit2D(Collision2D other)
+    private int numStrikesToDisappear = 1;
+    private int numStrikesLeft = 1;
+
+    public void OnCollisionExit2D(Collision2D other)
     {
-        _numStrikesLeft--;
-        if (_numStrikesLeft == 0)
+        numStrikesLeft--;
+        if (numStrikesLeft == 0)
         {
             Destroy(gameObject);
         }
@@ -18,11 +17,12 @@ public class TileBehaviour2D : MonoBehaviour
 
     public int NumStrikesToDisappear
     {
-        get => _numStrikesToDisappear;
-        set { 
-            _numStrikesToDisappear = value;
-            _numStrikesLeft = _numStrikesToDisappear;
-            // numStrikesChanged(); or do a numStrikes class   
+        get => numStrikesToDisappear;
+        set
+        {
+            numStrikesToDisappear = value;
+            numStrikesLeft = numStrikesToDisappear;
+            // numStrikesChanged() event to change tile colour; or do a numStrikes class
         }
     }
 }
