@@ -17,10 +17,10 @@ public class CharacterController2D : MonoBehaviour
     private void Awake()
     {
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        float platformWidth = _boxCollider.bounds.size.x / 2;
+        float paddleWidth = _boxCollider.bounds.size.x / 2;
         float screenWidth = WorldSize.RelativeWidth();
 
-        _leftRightBounds = screenWidth - platformWidth;
+        _leftRightBounds = screenWidth - paddleWidth;
     }
     
     // Update is called once per frame
