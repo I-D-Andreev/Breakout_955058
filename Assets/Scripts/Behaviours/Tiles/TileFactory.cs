@@ -63,7 +63,7 @@ public class TileFactory
         widthHeightInstantiated = true;
     }
 
-    public List<GameObject> CreateTiles(TileFactory.TileFormation tileFormation)
+    public int CreateTiles(TileFactory.TileFormation tileFormation)
     {
         switch (tileFormation)
         {
@@ -71,14 +71,12 @@ public class TileFactory
                 return CreateTilesRect();
         }
 
-        return new List<GameObject>();
+        return 0;
     }
 
     // Create Tiles in a Rectangle
-    private List<GameObject> CreateTilesRect()
+    private int CreateTilesRect()
     {
-        List<GameObject> tiles = new List<GameObject>();
-
         float tileWidthPadded = TileWidth() + tilePadding;
         float tileHeightPadded = TileHeight() + tilePadding;
 
@@ -100,6 +98,7 @@ public class TileFactory
         float tilePositionX = startWidth + widthOffset + tileWidthPadded/2; // as tiles are rendered from middle
         float tilePositionY = startHeight;
 
+        int tilesCount = 0;
         for (int i = 0; i < possibleRows; i++)
         {
 
@@ -109,13 +108,14 @@ public class TileFactory
                 float posX = tilePositionX + j * tileWidthPadded;
                 float posY = tilePositionY - i * tileHeightPadded;
                 
-                tiles.Add(CreateTile(posX, posY));
+                CreateTile(posX, posY);
+                tilesCount++;
             }
         }
         
-        Debug.Log("Total tiles: " + tiles.Count);
+        Debug.Log("Total tiles: " + tilesCount);
 
-        return tiles;
+        return tilesCount;
     }
 
 

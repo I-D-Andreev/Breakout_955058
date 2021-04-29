@@ -10,14 +10,22 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float worldPaddingSide = 0.3f;
     
     
-    private List<GameObject> tiles;
-    private TileFactory tileFactory;
+    private int _tilesCount;
+    private TileFactory _tileFactory;
 
     
     private void Awake()
     {
-        tileFactory = new TileFactory(tilePadding, worldPaddingTop, worldPaddingSide);
-        tiles = tileFactory.CreateTiles(TileFactory.TileFormation.Rectangle);
+        _tileFactory = new TileFactory(tilePadding, worldPaddingTop, worldPaddingSide);
+        _tilesCount = _tileFactory.CreateTiles(TileFactory.TileFormation.Rectangle);
+        
+        TileBehaviour2D.TileDestroyEvent.AddListener(TilesLeft);
+    }
+
+    private void TilesLeft(int _)
+    {
+        _tilesCount--;
+        Debug.Log(_tilesCount);
     }
 
 }
