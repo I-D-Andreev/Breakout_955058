@@ -12,7 +12,6 @@ public class SceneLoader : MonoBehaviour
         if (_classInstance == null)
         {
             _classInstance = this;
-            // DontDestroyOnLoad(this.gameObject);
         }
         else
         {
