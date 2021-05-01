@@ -19,7 +19,7 @@ public class TileManager : MonoBehaviour
         _tileFactory = new TileFactory(tilePadding, worldPaddingTop, worldPaddingSide);
         _tilesCount = _tileFactory.CreateTiles();
         
-        TileBehaviour2D.TileDestroyEvent.AddListener(TilesLeft);
+        TileBehaviour.TileDestroyEvent.AddListener(TilesLeft);
     }
 
     private void TilesLeft(int _)

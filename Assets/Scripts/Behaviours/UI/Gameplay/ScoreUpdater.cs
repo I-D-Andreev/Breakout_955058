@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TMP_Text))]
-public class ScoreUpdateListener : MonoBehaviour
+public class ScoreUpdater : MonoBehaviour
 {   
     private TMP_Text _scoreText;
     private int _score;     // use a second variable, so we don't have to convert strings to numbers often 
@@ -15,7 +15,7 @@ public class ScoreUpdateListener : MonoBehaviour
         _scoreText = GetComponent<TMP_Text>();
         Score = 0;
         
-        TileBehaviour2D.TileDestroyEvent.AddListener(UpdateScore);
+        TileBehaviour.TileDestroyEvent.AddListener(UpdateScore);
     }
 
     private void UpdateScore(int points)

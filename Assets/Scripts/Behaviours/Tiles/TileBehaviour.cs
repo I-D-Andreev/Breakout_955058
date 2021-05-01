@@ -8,7 +8,7 @@ public class TileDestroyEvent : UnityEvent<int> {}
 
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class TileBehaviour2D : MonoBehaviour
+public class TileBehaviour : MonoBehaviour
 {
     public static TileDestroyEvent TileDestroyEvent = new TileDestroyEvent();
 

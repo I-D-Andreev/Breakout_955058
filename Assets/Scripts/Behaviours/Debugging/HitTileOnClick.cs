@@ -13,7 +13,7 @@ public class HitTileOnClick : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(xy, new Vector2(0, 0));
             if (hit && hit.collider.gameObject.name.Contains("Tile"))
             {
-                hit.collider.gameObject.GetComponent<TileBehaviour2D>().OnCollisionExit2D(null);
+                hit.collider.gameObject.GetComponent<TileBehaviour>().OnCollisionExit2D(null);
             }
         }
     }
