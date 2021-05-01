@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 1937158923}
   - component: {fileID: 1937158922}
   m_Layer: 0
-  m_Name: TileManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
