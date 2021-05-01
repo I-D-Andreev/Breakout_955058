@@ -24,7 +24,7 @@ public class TileFactory
 
     private List<Func<int>> _tileCreationMethods;
 
-    public TileFactory(float tilePadding, float worldPaddingTop, float worldPaddingSide) : this("Prefabs/Tile",
+    public TileFactory(float tilePadding, float worldPaddingTop, float worldPaddingSide) : this("Prefabs/Gameplay/Tile",
         tilePadding, worldPaddingTop, worldPaddingSide)
     {
     }
