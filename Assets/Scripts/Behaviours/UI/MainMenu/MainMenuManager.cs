@@ -1,12 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private SceneLoader _sceneLoader;
+    private void Awake()
+    {
+        _sceneLoader = gameObject.AddComponent<SceneLoader>();
+    }
+
     public void StartGame()
     {
-        Debug.Log("Start Game");
+        _sceneLoader.LoadScene("Play");
     }
     
     public void Tutorial()
@@ -32,6 +39,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Exit Game");
+        Application.Quit();
     }
 }
