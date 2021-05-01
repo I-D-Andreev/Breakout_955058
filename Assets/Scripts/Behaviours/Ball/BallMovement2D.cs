@@ -21,5 +21,17 @@ public class BallMovement2D : MonoBehaviour
     {
         _rigidbody2D.velocity = movement * speed;
     }
-    
+
+    private void Update()
+    {
+        if (_rigidbody2D.velocity.x == 0)
+        {
+            _rigidbody2D.velocity = new Vector2(movement.x * speed, _rigidbody2D.velocity.y);
+        }
+        
+        if (_rigidbody2D.velocity.y == 0)
+        {
+            _rigidbody2D.velocity = new Vector2( _rigidbody2D.velocity.x, movement.y * speed);
+        }
+    }
 }
