@@ -23,7 +23,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void TopScores()
     {
-        Debug.Log("Top Scores");
+        _sceneLoader.LoadScene("Scores");
     }
 
     public void SwitchProfile()
