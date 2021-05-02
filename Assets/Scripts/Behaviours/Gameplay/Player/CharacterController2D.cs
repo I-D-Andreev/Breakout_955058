@@ -11,8 +11,9 @@ public class CharacterController2D : MonoBehaviour
     
     private BoxCollider2D _boxCollider;
     private Vector2 _moveDirection;
-    
     private float _leftRightBounds;
+
+    private PaddleChangeMonitor _paddleChangeMonitor;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class CharacterController2D : MonoBehaviour
         float screenWidth = WorldSize.RelativeWidth();
 
         _leftRightBounds = screenWidth - paddleWidth;
+        _paddleChangeMonitor = new PaddleChangeMonitor();
     }
     
     // Update is called once per frame
@@ -36,7 +38,8 @@ public class CharacterController2D : MonoBehaviour
 
         if (Math.Abs(newPos.x) <= _leftRightBounds)
         {
-            transform.position = newPos;
+            _paddleChangeMonitor.AddGameChange(new PaddlePositionChange(transform, Time.timeSinceLevelLoad, newPos));
+            // transform.position = newPos;
         }
     }
 
