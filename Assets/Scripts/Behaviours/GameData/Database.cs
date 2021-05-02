@@ -68,7 +68,7 @@ public class Database : MonoBehaviour
        // Load empty on corrupted data file
         if (File.Exists(_gameDataPath))
         {
-            Debug.Log("Load From File...");
+            // Debug.Log("Load From File...");
             FileStream stream = new FileStream(_gameDataPath, FileMode.Open);
             BinaryFormatter formatter = new BinaryFormatter();
             _gameData = formatter.Deserialize(stream) as GameData;
@@ -76,16 +76,16 @@ public class Database : MonoBehaviour
         }
         else
         {
-            Debug.Log("Start New...");
+            // Debug.Log("Start New...");
             _gameData = new GameData();
         }
         
-        Debug.Log("Done!");
+        // Debug.Log("Done!");
     }
     
     private static void SaveGameData()
     {
-        Debug.Log("Saving...");
+        // Debug.Log("Saving...");
         string directory = Path.GetDirectoryName(_gameDataPath);
         Directory.CreateDirectory(directory ?? string.Empty);
 
@@ -94,7 +94,7 @@ public class Database : MonoBehaviour
         formatter.Serialize(stream, _gameData);
         stream.Close();
         
-        Debug.Log("Saved!");
+        // Debug.Log("Saved!");
     }
 
     private static void SetGameDataPath ()
