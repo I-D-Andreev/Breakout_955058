@@ -27,13 +27,16 @@ public class PlayerProfile
 
     public void EndedGame(int score)
     {
-        if (score > Database.GameData.LastHighScore().Score)
+        GameData.HighScore lastHighScore = Database.GameData.LastHighScore();
+        if ((lastHighScore is null) || (score > lastHighScore.Score))
         {
+            Debug.Log("Add new score: " + score);
             _savedGames.Add(new SavedGame(score));
         }
     }
 
     public List<SavedGame> SavedGames => _savedGames;
+
     public int GamesPlayed => _gamesPlayed;
     public string PlayerName => _name;
 

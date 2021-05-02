@@ -23,6 +23,6 @@ public class GameEnd : MonoBehaviour
 
     private void UpdateGameData()
     {
-        Debug.Log("To save: " + _scoreUpdater.Score);
+        Database.GameData.LoggedInProfile.EndedGame(_scoreUpdater.Score);
     }
 }
