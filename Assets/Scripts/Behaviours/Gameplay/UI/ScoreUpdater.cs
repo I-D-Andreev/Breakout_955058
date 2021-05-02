@@ -18,9 +18,9 @@ public class ScoreUpdater : MonoBehaviour
         TileBehaviour.TileDestroyEvent.AddListener(UpdateScore);
     }
 
-    private void UpdateScore(int points)
+    private void UpdateScore(TileBehaviour tileBehaviour)
     {
-        Score += points;
+        Score += tileBehaviour.NumStrikesToDisappear;
     }
 
     private int Score

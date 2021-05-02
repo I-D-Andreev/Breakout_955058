@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class TileDestroyEvent : UnityEvent<int> {}
+public class TileDestroyEvent : UnityEvent<TileBehaviour> {}
 
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -29,15 +29,15 @@ public class TileBehaviour : MonoBehaviour
         NumStrikesLeft--;
         if (NumStrikesLeft == 0)
         {
-            TileDestroyEvent.Invoke(NumStrikesToDisappear);
+            TileDestroyEvent.Invoke(this);
             Destroy(gameObject);
         }
     }
 
-    private int NumStrikesToDisappear
+    public int NumStrikesToDisappear
     {
         get => _numStrikesToDisappear;
-        set
+        private set
         {
             _numStrikesToDisappear = value;
             NumStrikesLeft = _numStrikesToDisappear;

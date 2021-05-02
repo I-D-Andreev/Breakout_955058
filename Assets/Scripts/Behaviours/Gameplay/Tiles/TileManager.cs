@@ -22,7 +22,7 @@ public class TileManager : MonoBehaviour
         TileBehaviour.TileDestroyEvent.AddListener(TilesLeft);
     }
 
-    private void TilesLeft(int _)
+    private void TilesLeft(TileBehaviour _)
     {
         _tilesCount--;
         if (_tilesCount <= 0)
