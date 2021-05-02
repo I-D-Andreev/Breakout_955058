@@ -1,15 +1,42 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class DatabaseBehaviour : MonoBehaviour
+public class Database : MonoBehaviour
 {
-    private static DatabaseBehaviour _classInstance;
-    private string _gameDataPath;
-    private GameData _gameData;
+    private static Database _classInstance;
+    private static GameData _gameData;
+    private static string _gameDataPath;
+
+    // public static GameData GameData
+    // {
+    //     get
+    //     {
+    //         if (_classInstance == null)
+    //         {
+    //             GameObject gameObj = new GameObject("Database");
+    //             gameObj.AddComponent<Database>();
+    //         }
+    //
+    //         return _gameData;
+    //     }
+    // }
+
+    public static GameData GameData
+    {
+        get
+        {
+            if (_classInstance == null)
+            {
+                GameObject gameObj = new GameObject("Database");
+                gameObj.AddComponent<Database>();
+                // Awake called.   
+            }
+
+            return _gameData;
+        }
+    }
+
 
     private void Awake()
     {
@@ -18,10 +45,9 @@ public class DatabaseBehaviour : MonoBehaviour
             _classInstance = this;
             SetGameDataPath();
             LoadGameData();
-            
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (_classInstance != this)
         {
             Destroy(gameObject);
         }
@@ -34,9 +60,9 @@ public class DatabaseBehaviour : MonoBehaviour
             SaveGameData();
         }
     }
+    
 
-
-    private void LoadGameData()
+    private static void LoadGameData()
     {
        // todo1: Try/Catch
        // Load empty on corrupted data file
@@ -57,7 +83,7 @@ public class DatabaseBehaviour : MonoBehaviour
         Debug.Log("Done!");
     }
     
-    private void SaveGameData()
+    private static void SaveGameData()
     {
         Debug.Log("Saving...");
         string directory = Path.GetDirectoryName(_gameDataPath);
@@ -71,10 +97,8 @@ public class DatabaseBehaviour : MonoBehaviour
         Debug.Log("Saved!");
     }
 
-    private void SetGameDataPath ()
+    private static void SetGameDataPath ()
     {
         _gameDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Data", "data.save"));
     }
-    
-    public GameData GameData => _gameData;
 }

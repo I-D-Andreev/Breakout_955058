@@ -9,7 +9,7 @@ public class GameData
 {
     private List<PlayerProfile> _playerProfiles;
     private PlayerProfile _loggedInProfile;
-    
+
 
     public GameData()
     {
@@ -17,19 +17,21 @@ public class GameData
         _loggedInProfile = null;
     }
 
-    public List<PlayerProfile> PlayerProfiles => _playerProfiles;
+    // public List<PlayerProfile> PlayerProfiles => _playerProfiles;
     public PlayerProfile LoggedInProfile => _loggedInProfile;
-    
 
-    public (bool, string) CreateNewProfile(string playerName)
+
+    public (PlayerProfile, string) CreateNewProfile(string playerName, int profilePanelPosition)
     {
         if (FindPlayerByName(playerName) is null)
         {
-            Debug.Log($"Name {playerName} already taken.");
-            return (false, "Name is already taken!");
+            PlayerProfile playerProfile = new PlayerProfile(playerName, profilePanelPosition);
+            _playerProfiles.Add(playerProfile);
+            return (playerProfile, "Profile successfully created!");
         }
-        
-        return (true, "Profile successfully created!");
+
+        Debug.Log($"Name {playerName} already taken.");
+        return (null, "Name is already taken!");
     }
 
     public void LogIn(string playerName)
@@ -42,7 +44,7 @@ public class GameData
         _loggedInProfile = playerProfile;
     }
 
-    public PlayerProfile FindPlayerByName (string playerName)
+    public PlayerProfile FindPlayerByName(string playerName)
     {
         // Return the PlayerProfile with said name, or null if it doesn't exist.
         return _playerProfiles.FirstOrDefault(playerProfile => playerProfile.PlayerName.Equals(playerName));
@@ -52,7 +54,12 @@ public class GameData
     {
         return _playerProfiles.FirstOrDefault(playerProfile => playerProfile.ProfilePanelPosition == panelPosition);
     }
-    
+
+    public void DeleteProfile(PlayerProfile profile)
+    {
+        _playerProfiles.Remove(profile);
+    }
+
     public void CalculateTop10Scores()
     {
         // Top 10 Score representation class

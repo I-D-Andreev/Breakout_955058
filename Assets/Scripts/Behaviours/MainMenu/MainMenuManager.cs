@@ -23,7 +23,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void SwitchProfile()
     {
-        Debug.Log("Switch Profile");
+        SceneLoader.Loader.LoadScene("ChooseProfile");
     }
 
     public void Credits()
