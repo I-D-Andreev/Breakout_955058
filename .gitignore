@@ -45,5 +45,8 @@ sysinfo.txt
 *.unitypackage
 Builds/
 
+# Binary Save Data
+Data/
+
 # Crashlytics generated file
 crashlytics-build.properties
