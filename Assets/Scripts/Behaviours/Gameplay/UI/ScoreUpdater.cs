@@ -10,7 +10,7 @@ public class ScoreUpdater : MonoBehaviour
     private TMP_Text _scoreText;
     private int _score;     // use a second variable, so we don't have to convert strings to numbers often 
     
-    void Awake()
+    private void Awake()
     {
         _scoreText = GetComponent<TMP_Text>();
         Score = 0;
@@ -23,10 +23,10 @@ public class ScoreUpdater : MonoBehaviour
         Score += tileBehaviour.NumStrikesToDisappear;
     }
 
-    private int Score
+    public int Score
     {
         get => _score;
-        set
+        private set
         {
             _score = value;
             _scoreText.text = _score.ToString();
