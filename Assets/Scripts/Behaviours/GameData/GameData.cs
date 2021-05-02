@@ -70,8 +70,10 @@ public class GameData
                 highScores.Add(new HighScore(game.Score, profile));
             }    
         }
-        highScores.Sort((a,b)=>a.Score.CompareTo(b.Score));
         
+        // Descending order
+        highScores.Sort((a,b)=> b.Score.CompareTo(a.Score));
+
         return highScores.Take(10).ToList();
     }
 
