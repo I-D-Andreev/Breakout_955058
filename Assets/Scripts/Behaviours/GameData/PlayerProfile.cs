@@ -27,10 +27,9 @@ public class PlayerProfile
 
     public void EndedGame(int score)
     {
-        GameData.HighScore lastHighScore = Database.GameData.LastHighScore();
-        if ((lastHighScore is null) || (score > lastHighScore.Score))
+        if (Database.GameData.IsNewHighScore(score))
         {
-            Debug.Log("Add new score: " + score);
+            Debug.Log("Saving new high score: " + score);
             _savedGames.Add(new SavedGame(score));
         }
     }

@@ -65,7 +65,6 @@ public class GameData
         List<HighScore> highScores = new List<HighScore>();
         foreach (var profile in _playerProfiles)
         {
-            Debug.Log("Is saved games null: " + (profile.SavedGames is null));
             foreach (var game in profile.SavedGames)
             {
                 highScores.Add(new HighScore(game.Score, profile));
@@ -80,12 +79,18 @@ public class GameData
     {
         List<HighScore> highScores = CalculateTop10Scores();
 
-        if (highScores.Count == 0)
+        if (highScores.Count < 10)
         {
             return null;
         }
         
-        return highScores.Last();
+        return highScores[9];
+    }
+
+    public bool IsNewHighScore(int score)
+    {
+        HighScore lastHighScore = Database.GameData.LastHighScore();
+        return (lastHighScore is null) || (score > lastHighScore.Score);
     }
 
     public class HighScore
