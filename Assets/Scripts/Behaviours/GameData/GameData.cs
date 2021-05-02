@@ -60,8 +60,37 @@ public class GameData
         _playerProfiles.Remove(profile);
     }
 
-    public void CalculateTop10Scores()
+    public List<HighScore> CalculateTop10Scores()
     {
-        // Top 10 Score representation class
+        List<HighScore> highScores = new List<HighScore>();
+        foreach (var profile in _playerProfiles)
+        {
+            foreach (var game in profile.SavedGames)
+            {
+                highScores.Add(new HighScore(game.Score, profile));
+            }    
+        }
+        highScores.Sort((a,b)=>a.Score.CompareTo(b.Score));
+        
+        return highScores.Take(10).ToList();
+    }
+
+    public HighScore LastHighScore()
+    {
+        return CalculateTop10Scores().Last();
+    }
+
+    public class HighScore
+    {
+        private readonly int _score;
+        private readonly PlayerProfile _profile;
+        public HighScore(int score, PlayerProfile profile)
+        {
+            _score = score;
+            _profile = profile;
+        }
+
+        public int Score => _score;
+        public PlayerProfile Profile => _profile;
     }
 }
