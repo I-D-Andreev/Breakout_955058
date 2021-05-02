@@ -17,9 +17,10 @@ public class RenderScores : MonoBehaviour
 
     private void RenderTop10()
     {
-        for (var i = 1; i <= 10; i++)
+        List<GameData.HighScore> highScores = Database.GameData.CalculateTop10Scores();
+        for (var i = 0; i < highScores.Count; i++)
         {
-            RenderScoresRow(i, "Peter", (10 - i) * 10);
+            RenderScoresRow(i+1, highScores[i].Profile.PlayerName, highScores[i].Score);
         }
     }
 
