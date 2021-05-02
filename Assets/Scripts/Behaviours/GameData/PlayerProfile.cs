@@ -20,7 +20,7 @@ public class PlayerProfile
         _profilePanelPosition = profilePanelPosition;
     }
 
-    public void StartedNewGame()
+    public void NewGameStarted()
     {
         _gamesPlayed++;
     }
