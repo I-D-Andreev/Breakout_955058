@@ -75,4 +75,6 @@ public class DatabaseBehaviour : MonoBehaviour
     {
         _gameDataPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Data", "data.save"));
     }
+    
+    public GameData GameData => _gameData;
 }

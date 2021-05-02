@@ -17,7 +17,9 @@ public class GameData
         _loggedInProfile = null;
     }
 
-    public PlayerProfile GetLoggedInUser => _loggedInProfile;
+    public List<PlayerProfile> PlayerProfiles => _playerProfiles;
+    public PlayerProfile LoggedInProfile => _loggedInProfile;
+    
 
     public (bool, string) CreateNewProfile(string playerName)
     {
@@ -27,7 +29,6 @@ public class GameData
             return (false, "Name is already taken!");
         }
         
-        _playerProfiles.Add(new PlayerProfile(playerName));
         return (true, "Profile successfully created!");
     }
 
@@ -36,12 +37,22 @@ public class GameData
         _loggedInProfile = FindPlayerByName(playerName);
     }
 
-    private PlayerProfile FindPlayerByName (string playerName)
+    public void LogIn(PlayerProfile playerProfile)
+    {
+        _loggedInProfile = playerProfile;
+    }
+
+    public PlayerProfile FindPlayerByName (string playerName)
     {
         // Return the PlayerProfile with said name, or null if it doesn't exist.
         return _playerProfiles.FirstOrDefault(playerProfile => playerProfile.PlayerName.Equals(playerName));
     }
 
+    public PlayerProfile FindPlayerByPanelPosition(int panelPosition)
+    {
+        return _playerProfiles.FirstOrDefault(playerProfile => playerProfile.ProfilePanelPosition == panelPosition);
+    }
+    
     public void CalculateTop10Scores()
     {
         // Top 10 Score representation class

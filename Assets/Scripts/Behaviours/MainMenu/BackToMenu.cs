@@ -5,14 +5,8 @@ using UnityEngine;
 
 public class BackToMenu : MonoBehaviour
 {
-    private SceneLoader _sceneLoader;
-    private void Awake()
-    {
-        _sceneLoader = gameObject.AddComponent<SceneLoader>();
-    }
-
     public void BackToMainMenu()
     {
-        _sceneLoader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadScene("MainMenu");
     }
 }

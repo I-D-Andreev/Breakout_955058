@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private SceneLoader _sceneLoader;
-    private void Awake()
-    {
-        _sceneLoader = gameObject.AddComponent<SceneLoader>();
-    }
 
     public void StartGame()
     {
-        _sceneLoader.LoadScene("Gameplay");
+        SceneLoader.Loader.LoadScene("Gameplay");
     }
     
     public void Tutorial()
@@ -23,7 +18,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void TopScores()
     {
-        _sceneLoader.LoadScene("Scores");
+        SceneLoader.Loader.LoadScene("Scores");
     }
 
     public void SwitchProfile()

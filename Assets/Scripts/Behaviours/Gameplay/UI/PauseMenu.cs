@@ -9,12 +9,6 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject menu;
     private bool _isGamePaused = false;
-    private SceneLoader _sceneLoader;
-
-    private void Awake()
-    {
-        _sceneLoader = gameObject.AddComponent<SceneLoader>();
-    }
 
     public void Resume()
     {
@@ -25,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     {
         // todo1: take score, recording?, etc
         Time.timeScale = 1;
-        _sceneLoader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadScene("MainMenu");
     }
   
     public void OnPause(InputValue _)
