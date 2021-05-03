@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallDeathChange : BallChange
+public class BallDestroyChange : BallChange
 {
-    public BallDeathChange(float time) : base(time)
+    public BallDestroyChange(float time) : base(time)
     {
     }
 
