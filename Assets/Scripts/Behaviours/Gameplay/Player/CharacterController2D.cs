@@ -14,6 +14,7 @@ public class CharacterController2D : MonoBehaviour
     private float _leftRightBounds;
 
     private GameChangeMonitor _gameChangeMonitor;
+    private float _firstFrameTime;
 
     private void Awake()
     {
@@ -24,10 +25,21 @@ public class CharacterController2D : MonoBehaviour
         _leftRightBounds = screenWidth - paddleWidth;
         _gameChangeMonitor = new GameChangeMonitor();
     }
-    
-    // Update is called once per frame
+
+    // private void OnEnable()
+    // {
+    //     _firstFrameTime = -1;
+    // }
+
     void Update()
     {
+        // if (Math.Abs(_firstFrameTime - (-1)) < 0.1)
+        // {
+        //     _firstFrameTime = Time.timeSinceLevelLoad;
+        //     Debug.Log("Character first frame: " + _firstFrameTime);
+        //
+        // }
+        
         MovePlayer();
     }
 
@@ -38,7 +50,7 @@ public class CharacterController2D : MonoBehaviour
 
         if (Math.Abs(newPos.x) <= _leftRightBounds)
         {
-            _gameChangeMonitor.SaveAndMakeGameChange(new PaddlePositionChange(Time.timeSinceLevelLoad, newPos), gameObject);
+            _gameChangeMonitor.SaveAndMakeGameChange(new PaddlePositionChange(Time.timeSinceLevelLoad - _firstFrameTime, newPos.x, newPos.y), gameObject);
             // transform.position = newPos;
         }
     }

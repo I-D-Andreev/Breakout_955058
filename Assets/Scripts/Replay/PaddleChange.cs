@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class PaddleChange : GameChange
 {
     protected PaddleChange(float time) : base(time) { }

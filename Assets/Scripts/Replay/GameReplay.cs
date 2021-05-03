@@ -6,11 +6,13 @@ public class GameReplay
 {
     private List<GameChange> _gameChanges;
     private int _currIndex;
+    private float _sceneLoadOffset;
     
     // references GameObjects
     private GameObject _paddle;
     private GameObject _ball;
     private GameObject _tilePrefab;
+    
     
     public GameReplay(List<GameChange> gameChanges, GameObject paddle, GameObject ball, GameObject tilePrefab)
     {
@@ -20,6 +22,8 @@ public class GameReplay
         _paddle = paddle;
         _ball = ball;
         _tilePrefab = tilePrefab;
+
+        _sceneLoadOffset = _gameChanges.Count > 0 ? _gameChanges[0].Time : 0;
     }
 
     public void ReplayChanges(float time)

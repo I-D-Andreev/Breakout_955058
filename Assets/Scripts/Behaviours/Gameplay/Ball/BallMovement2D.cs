@@ -11,7 +11,7 @@ public class BallMovement2D : MonoBehaviour
     [SerializeField] private Vector2 movement = new Vector2(-1, 1);
     private Rigidbody2D _rigidbody2D;
     private GameChangeMonitor _gameChangeMonitor;
-    
+    private float _firstFrameTime;
     
     private void Awake()
     {
@@ -24,8 +24,20 @@ public class BallMovement2D : MonoBehaviour
         _rigidbody2D.velocity = movement * speed;
     }
 
+    // private void OnEnable()
+    // {
+    //     _firstFrameTime = -1;
+    // }
+
     private void Update()
     {
+        // if (Math.Abs(_firstFrameTime - (-1)) < 0.1)
+        // {
+        //     _firstFrameTime = Time.timeSinceLevelLoad;
+        //     Debug.Log("Ball first frame: " + _firstFrameTime);
+        //
+        // }
+        
         if (_rigidbody2D.velocity.x == 0)
         {
             _rigidbody2D.velocity = new Vector2(movement.x * speed, _rigidbody2D.velocity.y);
@@ -35,7 +47,8 @@ public class BallMovement2D : MonoBehaviour
         {
             _rigidbody2D.velocity = new Vector2( _rigidbody2D.velocity.x, movement.y * speed);
         }
-        
-        _gameChangeMonitor.SaveGameChange(new BallPositionChange(Time.timeSinceLevelLoad, gameObject.transform.position));
+
+        var position = gameObject.transform.position;
+        _gameChangeMonitor.SaveGameChange(new BallPositionChange(Time.timeSinceLevelLoad - _firstFrameTime, position.x, position.y));
     }
 }

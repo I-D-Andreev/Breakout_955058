@@ -113,15 +113,9 @@ public class ProfilePanel : MonoBehaviour
 
     public void DeleteButtonClicked()
     {
-        bool result = EditorUtility.DisplayDialog("Are you sure?",
-            "Deleting this profile will remove all the data associated with it.",
-            "Delete", "Cancel");
-
-        if (result)
-        {
-            Database.GameData.DeleteProfile(_playerProfile);
-            ShowCreateProfileScreen();
-        }
+        Database.GameData.DeleteProfile(_playerProfile);
+        ShowCreateProfileScreen();
+        
     }
 
     public void PlayButtonClicked()

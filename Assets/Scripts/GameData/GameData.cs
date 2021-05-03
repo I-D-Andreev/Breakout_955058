@@ -17,7 +17,6 @@ public class GameData
         _loggedInProfile = null;
     }
 
-    // public List<PlayerProfile> PlayerProfiles => _playerProfiles;
     public PlayerProfile LoggedInProfile => _loggedInProfile;
 
 

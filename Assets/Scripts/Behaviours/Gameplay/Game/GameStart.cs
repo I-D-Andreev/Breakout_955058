@@ -14,7 +14,12 @@ public class GameStart : MonoBehaviour
         Database.GameData.LoggedInProfile.NewGameStarted();
         _gameChangeMonitor = new GameChangeMonitor();
         _paddle = GameObject.Find("Paddle");
+        _ball = GameObject.Find("Ball");
 
-        _gameChangeMonitor.SaveGameChange(new PaddlePositionChange(Time.timeSinceLevelLoad,_paddle.transform.position));
+        var paddlePos = _paddle.transform.position;
+        _gameChangeMonitor.SaveGameChange(new PaddlePositionChange(0, paddlePos.x, paddlePos.y));
+
+        var ballPos = _ball.transform.position;
+        _gameChangeMonitor.SaveGameChange(new BallPositionChange(0, ballPos.x, ballPos.y));
     }
 }

@@ -28,8 +28,14 @@ public class GameEnd : MonoBehaviour
     {
         CurrentReplayData.ReplayData = GameChangeMonitor.GameChanges;
         CurrentReplayData.IsNewHighScore = Database.GameData.IsNewHighScore(_scoreUpdater.Score);
-        
+
         Database.GameData.LoggedInProfile.EndedGame(_scoreUpdater.Score, GameChangeMonitor.GameChanges);
+        Debug.Log("First 10 Game Changes");
+        for (var i = 0; i < 10; i++)
+        {
+            Debug.Log($"{i} : {GameChangeMonitor.GameChanges[i].Time}");
+        }
+        
         GameChangeMonitor.NullifyGameChangeData();
     }
 }

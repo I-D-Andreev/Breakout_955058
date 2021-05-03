@@ -157,7 +157,7 @@ public class TileFactory
     {
         int numStrikesToDisappear = Random.Range(1, 3 + 1);
         _gameChangeMonitor.SaveAndMakeGameChange(
-            new TileCreateChange(Time.timeSinceLevelLoad, new Vector3(posX, posY, 0), numStrikesToDisappear),
+            new TileCreateChange(0, posX, posY, numStrikesToDisappear),
             _tilePrefab);
     }
 

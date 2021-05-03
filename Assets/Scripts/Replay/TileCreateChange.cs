@@ -4,20 +4,23 @@ using UnityEngine;
 
 // Note: TileColorChange and TileDestroy are handled by the
 // tile behaviour script.
+[System.Serializable]
 public class TileCreateChange : TileChange
 {
-    private Vector3 _position;
+    private float _posX;
+    private float _posY;
     private int _numStrikesToDisappear;
     
-    public TileCreateChange(float time, Vector3 position, int numStrikesToDisappear) : base(time)
+    public TileCreateChange(float time, float posX, float posY, int numStrikesToDisappear) : base(time)
     {
-        _position = position;
+        _posX = posX;
+        _posY = posY;
         _numStrikesToDisappear = numStrikesToDisappear;
     }
 
     public override void MakeChange(GameObject prefab)
     {
-        GameObject obj = GameObject.Instantiate(prefab, _position, Quaternion.identity);
+        GameObject obj = GameObject.Instantiate(prefab, new Vector3(_posX,_posY, 0), Quaternion.identity);
         obj.GetComponent<TileBehaviour>().NumStrikesToDisappear = _numStrikesToDisappear;
     }
 }
