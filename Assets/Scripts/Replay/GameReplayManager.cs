@@ -6,10 +6,13 @@ using UnityEngine;
 public class GameReplayManager : MonoBehaviour
 {
     private GameReplay _gameReplay;
+
+    [SerializeField] private GameObject paddle;
+    
     
     private void Awake()
     {
-        _gameReplay = CurrentGameReplay.GameReplay;
+        _gameReplay = new GameReplay(CurrentReplayData.ReplayData, paddle);
     }
 
     void Update()

@@ -4,17 +4,25 @@ using UnityEngine;
 
 public abstract class GameChange
 {
-   private Transform _transform;
+   // public static Transform PaddleTransform { get; set; }
+   // public static Transform BallTransform { get; set; }
+
    private float _time;
 
-   protected GameChange(Transform transform, float time)
+   protected GameChange(float time)
    {
-      _transform = transform;
       _time = time;
    }
 
-   public abstract void MakeChange();
+   public abstract void MakeChange(GameObject gameObject);
+   public abstract GameChangeType ChangeType(); 
 
-   public Transform Transform => _transform;
    public float Time => _time;
+   
+   public enum GameChangeType
+   {
+      Paddle,
+      Ball,
+      Tile
+   }
 }

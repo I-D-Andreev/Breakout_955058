@@ -15,8 +15,6 @@ public class GameStart : MonoBehaviour
         _gameChangeMonitor = new GameChangeMonitor();
         _paddle = GameObject.Find("Paddle");
 
-        // Save the starting positions of the Objects.
-        _gameChangeMonitor.SaveGameChange(new PaddlePositionChange(_paddle.transform, Time.timeSinceLevelLoad,_paddle.transform.position));
-        DontDestroyOnLoad(_paddle);
+        _gameChangeMonitor.SaveGameChange(new PaddlePositionChange(Time.timeSinceLevelLoad,_paddle.transform.position));
     }
 }

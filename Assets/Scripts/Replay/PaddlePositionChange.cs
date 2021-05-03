@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PaddlePositionChange : GameChange
+public class PaddlePositionChange : PaddleChange
 {
     private Vector2 _newPos;
     
-    public PaddlePositionChange(Transform transform, float time, Vector2 newPos)
-        : base(transform, time)
+    public PaddlePositionChange(float time, Vector2 newPos)
+        : base(time)
     {
         _newPos = newPos;
     }
     
-    public override void MakeChange()
+    public override void MakeChange(GameObject obj)
     {
-        this.Transform.position = _newPos;
+        obj.transform.position = _newPos;
     }
 }

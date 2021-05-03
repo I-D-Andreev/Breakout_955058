@@ -6,22 +6,30 @@ public class GameReplay
 {
     private List<GameChange> _gameChanges;
     private int _currIndex;
-
-    public GameReplay() : this(new List<GameChange>())
-    {
-    }
-
-    public GameReplay(List<GameChange> gameChanges)
+    // references GameObjects
+    private GameObject _paddle;
+    
+    public GameReplay(List<GameChange> gameChanges, GameObject paddle)
     {
         _currIndex = 0;
         _gameChanges = gameChanges;
+        
+        _paddle = paddle;
     }
 
     public void ReplayChanges(float time)
     {
         while (!ReplayedAllChanges() && (time > _gameChanges[_currIndex].Time))
         {
-            _gameChanges[_currIndex].MakeChange();
+            switch (_gameChanges[_currIndex].ChangeType())
+            {
+                case GameChange.GameChangeType.Paddle:
+                    _gameChanges[_currIndex].MakeChange(_paddle);
+                    break;
+                
+                default:
+                    continue;
+            }
             _currIndex++;
         }
     }

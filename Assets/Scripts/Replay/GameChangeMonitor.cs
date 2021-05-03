@@ -6,10 +6,10 @@ public class GameChangeMonitor
 {
     private static List<GameChange> _changes = new List<GameChange>();
     
-    public void SaveAndMakeGameChange(GameChange gameChange)
+    public void SaveAndMakeGameChange(GameChange gameChange, GameObject gameObject)
     {
         SaveGameChange(gameChange);
-        gameChange.MakeChange();
+        gameChange.MakeChange(gameObject);
     }
     
     public void SaveGameChange(GameChange gameChange)

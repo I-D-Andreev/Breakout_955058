@@ -38,7 +38,7 @@ public class CharacterController2D : MonoBehaviour
 
         if (Math.Abs(newPos.x) <= _leftRightBounds)
         {
-            _gameChangeMonitor.SaveAndMakeGameChange(new PaddlePositionChange(transform, Time.timeSinceLevelLoad, newPos));
+            _gameChangeMonitor.SaveAndMakeGameChange(new PaddlePositionChange(Time.timeSinceLevelLoad, newPos), gameObject);
             // transform.position = newPos;
         }
     }

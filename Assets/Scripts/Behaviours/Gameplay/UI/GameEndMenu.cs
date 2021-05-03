@@ -47,7 +47,7 @@ public class GameEndMenu : MonoBehaviour
 
     public void ReplayButtonClicked()
     {
-        CurrentGameReplay.GameReplay = new GameReplay(GameChangeMonitor.GameChanges);
+        CurrentReplayData.ReplayData = GameChangeMonitor.GameChanges;
         SceneLoader.Loader.LoadScene("GameReplay");
 
     }
