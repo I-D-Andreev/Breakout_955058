@@ -14,7 +14,7 @@ public class ScoreAchievement : Achievement
 
     public override string AchievementText()
     {
-        return $"Achieved a score of {_scoreNeeded}!\nYou earned +{AchievementPoints} points!";
+        return $"You achieved a score of {_scoreNeeded}!\nYou earned +{AchievementPoints} points!";
     }
 
     public void TryAchieve(int score)

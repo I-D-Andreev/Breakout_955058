@@ -18,7 +18,6 @@ public class AchievementsManager : MonoBehaviour
                 GameObject gameObj = new GameObject("AchievementsManager");
                 gameObj.AddComponent<AchievementsManager>();
                 // - Awake called -
-                // where "this" variable is the currently added SceneLoader
             }
             
             return _classInstance;
@@ -61,7 +60,7 @@ public class AchievementsManager : MonoBehaviour
 
         canvasGroup.alpha = 1;
         
-        StartCoroutine(FadeAchievement(canvasGroup, 4));
+        StartCoroutine(FadeAchievement(canvasGroup, 3));
     }
 
     private IEnumerator FadeAchievement(CanvasGroup canvasGroup, float time)
@@ -73,11 +72,5 @@ public class AchievementsManager : MonoBehaviour
         }
 
         yield return null;
-    }
-
-    public void TestAchievement()
-    {
-        ShowAchievement(new ScoreAchievement(30, 10));
-        // ShowAchievement(new ScoreAchievement(50, 50));
     }
 }

@@ -26,7 +26,7 @@ public abstract class Achievement
 
     private void ShowAchievement()
     {
-     // AchievementManager (MonoSingleton).ShowAchievement(this);   
+        AchievementsManager.Manager.ShowAchievement(this);
     }
 
     public abstract string AchievementText();
