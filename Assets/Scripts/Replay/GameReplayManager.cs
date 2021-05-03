@@ -8,11 +8,11 @@ public class GameReplayManager : MonoBehaviour
     private GameReplay _gameReplay;
 
     [SerializeField] private GameObject paddle;
-    
+    [SerializeField] private GameObject ball;
     
     private void Awake()
     {
-        _gameReplay = new GameReplay(CurrentReplayData.ReplayData, paddle);
+        _gameReplay = new GameReplay(CurrentReplayData.ReplayData, paddle, ball);
     }
 
     void Update()
