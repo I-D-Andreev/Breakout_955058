@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AchievementsManager : MonoBehaviour
 {
-    [SerializeField] private GameObject achievementPrefab;
-    
     private static AchievementsManager _classInstance;
+
+    [SerializeField] private GameObject achievementPrefab;
     
     public static AchievementsManager Manager
     {
@@ -42,13 +42,23 @@ public class AchievementsManager : MonoBehaviour
     {
         
         ScoreUpdater.ScoreChangeEvent.AddListener(CheckScoreAchievements);
+        TileBehaviour.TileDestroyEvent.AddListener(CheckTotalTilesAchievements);
     }
 
     private void CheckScoreAchievements(int score)
     {
-        foreach (ScoreAchievement achievement in Database.GameData.LoggedInProfile.PlayerAchievements.ScoreAchievements)
+        foreach (ScoreAchievement achievement in GetLoggedInProfile().PlayerAchievements.ScoreAchievements)
         {
             achievement.TryAchieve(score);
+        }
+    }
+
+    private void CheckTotalTilesAchievements(TileBehaviour _)
+    {
+        GetLoggedInProfile().TotalTilesDestroyed++;
+        foreach (TotalTilesAchievement achievement in GetLoggedInProfile().PlayerAchievements.TotalTileAchievements)
+        {
+            achievement.TryAchieve(GetLoggedInProfile().TotalTilesDestroyed);
         }
     }
 
@@ -72,5 +82,10 @@ public class AchievementsManager : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    private PlayerProfile GetLoggedInProfile()
+    {
+        return Database.GameData.LoggedInProfile;
     }
 }

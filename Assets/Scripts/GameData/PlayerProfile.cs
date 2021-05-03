@@ -10,6 +10,8 @@ public class PlayerProfile
 
     private string _name;
     private int _gamesPlayed;
+    private int _totalTilesDestroyed;
+    
     private int _profilePanelPosition; // which panel was this account created in
 
     public PlayerProfile(string playerName, int profilePanelPosition)
@@ -17,6 +19,7 @@ public class PlayerProfile
         _savedGames = new List<SavedGame>();
         _playerAchievements = new PlayerAchievements();
         _gamesPlayed = 0;
+        _totalTilesDestroyed = 0;
         _name = playerName;
         _profilePanelPosition = profilePanelPosition;
     }
@@ -33,6 +36,12 @@ public class PlayerProfile
             Debug.Log("Saving new high score and Game Data: " + score + ", " + gameReplayData.Count);
             _savedGames.Add(new SavedGame(score, gameReplayData));
         }
+    }
+
+    public int TotalTilesDestroyed
+    {
+        get => _totalTilesDestroyed;
+        set => _totalTilesDestroyed = value;
     }
 
     public PlayerAchievements PlayerAchievements => _playerAchievements;
