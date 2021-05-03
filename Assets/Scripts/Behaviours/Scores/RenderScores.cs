@@ -20,16 +20,18 @@ public class RenderScores : MonoBehaviour
         List<GameData.HighScore> highScores = Database.GameData.CalculateTop10Scores();
         for (var i = 0; i < highScores.Count; i++)
         {
-            RenderScoresRow(i+1, highScores[i].Profile.PlayerName, highScores[i].Score);
+            RenderScoresRow(i+1, highScores[i]);
         }
     }
 
-    private void RenderScoresRow(int rank, string playerName, int score)
+    private void RenderScoresRow(int rank, GameData.HighScore highScore)
     {
         GameObject row = Instantiate(scoreRowPrefab, _scoresHolder.transform);
 
         row.transform.Find("rank").GetComponent<TextMeshProUGUI>().text = $"{rank}.";
-        row.transform.Find("name").GetComponent<TextMeshProUGUI>().text = playerName;
-        row.transform.Find("score").GetComponent<TextMeshProUGUI>().text = score.ToString();
+        row.transform.Find("name").GetComponent<TextMeshProUGUI>().text = highScore.Profile.PlayerName;
+        row.transform.Find("score").GetComponent<TextMeshProUGUI>().text = highScore.Score.ToString();
+        
+        row.transform.Find("buttonPanel/replay").gameObject.GetComponent<GameReplayButton>().GameChanges = highScore.GameReplayData;
     }
 }

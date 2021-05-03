@@ -66,7 +66,7 @@ public class GameData
         {
             foreach (var game in profile.SavedGames)
             {
-                highScores.Add(new HighScore(game.Score, profile));
+                highScores.Add(new HighScore(game, profile));
             }    
         }
         
@@ -96,15 +96,16 @@ public class GameData
 
     public class HighScore
     {
-        private readonly int _score;
+        private readonly SavedGame _game;
         private readonly PlayerProfile _profile;
-        public HighScore(int score, PlayerProfile profile)
+        public HighScore(SavedGame game, PlayerProfile profile)
         {
-            _score = score;
+            _game = game;
             _profile = profile;
         }
 
-        public int Score => _score;
+        public int Score => _game.Score;
+        public List<GameChange> GameReplayData => _game.GameReplayData;
         public PlayerProfile Profile => _profile;
     }
 }

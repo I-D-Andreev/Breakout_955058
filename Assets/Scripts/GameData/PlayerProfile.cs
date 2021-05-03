@@ -29,7 +29,7 @@ public class PlayerProfile
     {
         if (Database.GameData.IsNewHighScore(score))
         {
-            Debug.Log("Saving new high score: " + score);
+            Debug.Log("Saving new high score and Game Data: " + score + ", " + gameReplayData.Count);
             _savedGames.Add(new SavedGame(score, gameReplayData));
         }
     }
