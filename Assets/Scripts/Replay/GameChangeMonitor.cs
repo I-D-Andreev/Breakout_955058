@@ -17,5 +17,10 @@ public class GameChangeMonitor
         _changes.Add(gameChange);
     }
 
+    public static void NullifyGameChangeData()
+    {
+        _changes = new List<GameChange>();
+    }
+    
     public static List<GameChange> GameChanges => _changes;
 }

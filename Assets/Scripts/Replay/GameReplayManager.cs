@@ -10,6 +10,7 @@ public class GameReplayManager : MonoBehaviour
     [SerializeField] private GameObject paddle;
     [SerializeField] private GameObject ball;
     [SerializeField] private GameObject exampleTile;
+    [SerializeField] private GameObject gameEndMenu;
     
     private void Awake()
     {
@@ -21,6 +22,10 @@ public class GameReplayManager : MonoBehaviour
         if (!_gameReplay.ReplayedAllChanges())
         {
             _gameReplay.ReplayChanges(Time.timeSinceLevelLoad);
+        }
+        else
+        {
+            gameEndMenu.SetActive(true);
         }
     }
 }

@@ -33,10 +33,7 @@ public class GameEndMenu : MonoBehaviour
     {
         int score = _scoreUpdater.Score;
         _gameEndScoreTextBox.text = $"Score: {score}";
-        if (Database.GameData.IsNewHighScore(score))
-        {
-            _newHighScore.SetActive(true);
-        }
+        _newHighScore.SetActive(Database.GameData.IsNewHighScore(score));
         _gameEndMenu.SetActive(true);
     }
 
