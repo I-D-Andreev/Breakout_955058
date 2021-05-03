@@ -25,12 +25,12 @@ public class PlayerProfile
         _gamesPlayed++;
     }
 
-    public void EndedGame(int score)
+    public void EndedGame(int score, List<GameChange> gameReplayData)
     {
         if (Database.GameData.IsNewHighScore(score))
         {
             Debug.Log("Saving new high score: " + score);
-            _savedGames.Add(new SavedGame(score));
+            _savedGames.Add(new SavedGame(score, gameReplayData));
         }
     }
 

@@ -8,20 +8,6 @@ public class Database : MonoBehaviour
     private static GameData _gameData;
     private static string _gameDataPath;
 
-    // public static GameData GameData
-    // {
-    //     get
-    //     {
-    //         if (_classInstance == null)
-    //         {
-    //             GameObject gameObj = new GameObject("Database");
-    //             gameObj.AddComponent<Database>();
-    //         }
-    //
-    //         return _gameData;
-    //     }
-    // }
-
     public static GameData GameData
     {
         get
