@@ -45,6 +45,12 @@ public class GameEndMenu : MonoBehaviour
         SceneLoader.Loader.LoadScene("Gameplay");
     }
 
+    public void ReplayButtonClicked()
+    {
+        CurrentGameReplay.GameReplay = new GameReplay(GameChangeMonitor.GameChanges);
+        SceneLoader.Loader.LoadScene("GameReplay");
+
+    }
     public void QuitToMenuButtonClicked()
     {
         SceneLoader.Loader.LoadScene("MainMenu");
