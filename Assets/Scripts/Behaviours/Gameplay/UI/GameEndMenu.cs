@@ -33,22 +33,26 @@ public class GameEndMenu : MonoBehaviour
     {
         int score = _scoreUpdater.Score;
         _gameEndScoreTextBox.text = $"Score: {score}";
+        Time.timeScale = 0;
         _newHighScore.SetActive(Database.GameData.IsNewHighScore(score));
         _gameEndMenu.SetActive(true);
     }
 
     public void NewGameButtonClicked()
     {
+        Time.timeScale = 1;
         SceneLoader.Loader.LoadScene("Gameplay");
     }
 
     public void ReplayButtonClicked()
     {
+        Time.timeScale = 1;
         SceneLoader.Loader.LoadScene("GameReplay");
 
     }
     public void QuitToMenuButtonClicked()
     {
+        Time.timeScale = 1;
         SceneLoader.Loader.LoadScene("MainMenu");
     }
 }

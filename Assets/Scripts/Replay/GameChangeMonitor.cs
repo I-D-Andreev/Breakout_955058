@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameChangeMonitor
 {
     private static List<GameChange> _changes = new List<GameChange>();
+    private static bool _isLocked;
     
     public void SaveAndMakeGameChange(GameChange gameChange, GameObject gameObject)
     {
@@ -14,11 +15,20 @@ public class GameChangeMonitor
     
     public void SaveGameChange(GameChange gameChange)
     {
-        _changes.Add(gameChange);
+        if (gameChange.Time == 0)
+        {
+            _isLocked = false;
+        }
+        
+        if (!_isLocked)
+        {
+            _changes.Add(gameChange);
+        }
     }
 
     public static void NullifyGameChangeData()
     {
+        _isLocked = true;
         _changes = new List<GameChange>();
     }
     
