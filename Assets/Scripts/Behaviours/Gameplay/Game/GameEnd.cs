@@ -18,7 +18,7 @@ public class GameEnd : MonoBehaviour
     {
         if (obj.CompareTag("Ball"))
         {
-            _gameChangeMonitor.SaveAndMakeGameChange(new BallDeathChange(Time.timeSinceLevelLoad), obj);
+            _gameChangeMonitor.SaveAndMakeGameChange(new BallDestroyChange(Time.timeSinceLevelLoad), obj);
             
             UpdateGameData();
         }

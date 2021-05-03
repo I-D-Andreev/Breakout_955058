@@ -23,6 +23,7 @@ public class TileFactory
 
 
     private List<Func<int>> _tileCreationMethods;
+    private GameChangeMonitor _gameChangeMonitor;
 
     public TileFactory(float tilePadding, float worldPaddingTop, float worldPaddingSide) : this("Prefabs/Gameplay/Tile",
         tilePadding, worldPaddingTop, worldPaddingSide)
@@ -32,6 +33,8 @@ public class TileFactory
     public TileFactory(string prefabPath, float tilePadding, float worldPaddingTop, float worldPaddingSide)
     {
         _tilePrefab = Resources.Load<GameObject>(prefabPath);
+        _gameChangeMonitor = new GameChangeMonitor();
+
         (float tileWidth, float tileHeight) = CalculateWidthHeight();
 
         _tileWidthPadded = tileWidth + tilePadding;
@@ -78,8 +81,6 @@ public class TileFactory
             }
         }
 
-        Debug.Log("Total tiles: " + tilesCount);
-
         return tilesCount;
     }
 
@@ -109,7 +110,8 @@ public class TileFactory
         // In such a case, offset the tiles with half a tile more.
         float additionalOffset = (_possibleColumns % 2) * (_tileWidthPadded / 2);
 
-        float tilePositionX = _startWidth + _widthOffset + additionalOffset + _tileWidthPadded / 2; // as tiles are rendered from middle
+        float tilePositionX =
+            _startWidth + _widthOffset + additionalOffset + _tileWidthPadded / 2; // as tiles are rendered from middle
         float tilePositionY = _startHeight;
 
         int tilesCount = 0;
@@ -153,7 +155,10 @@ public class TileFactory
 
     private void CreateTile(float posX, float posY)
     {
-        GameObject.Instantiate(_tilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
+        _gameChangeMonitor.SaveAndMakeGameChange(
+            new TileCreateChange(Time.timeSinceLevelLoad, new Vector3(posX, posY, 0)),
+            _tilePrefab);
+        // GameObject.Instantiate(_tilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
     }
 
 

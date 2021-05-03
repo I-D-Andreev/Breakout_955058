@@ -10,14 +10,16 @@ public class GameReplay
     // references GameObjects
     private GameObject _paddle;
     private GameObject _ball;
+    private GameObject _tilePrefab;
     
-    public GameReplay(List<GameChange> gameChanges, GameObject paddle, GameObject ball)
+    public GameReplay(List<GameChange> gameChanges, GameObject paddle, GameObject ball, GameObject tilePrefab)
     {
         _currIndex = 0;
         _gameChanges = gameChanges;
         
         _paddle = paddle;
         _ball = ball;
+        _tilePrefab = tilePrefab;
     }
 
     public void ReplayChanges(float time)
@@ -34,6 +36,10 @@ public class GameReplay
                     _gameChanges[_currIndex].MakeChange(_ball);
                     break;
                 
+                case GameChange.GameChangeType.Tile:
+                    _gameChanges[_currIndex].MakeChange(_tilePrefab);
+                    break;
+
                 default:
                     continue;
             }
