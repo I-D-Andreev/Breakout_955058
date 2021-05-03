@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerProfile
 {
-    // AchievementManager
+    private PlayerAchievements _playerAchievements;
     private List<SavedGame> _savedGames;
 
     private string _name;
@@ -15,6 +15,7 @@ public class PlayerProfile
     public PlayerProfile(string playerName, int profilePanelPosition)
     {
         _savedGames = new List<SavedGame>();
+        _playerAchievements = new PlayerAchievements();
         _gamesPlayed = 0;
         _name = playerName;
         _profilePanelPosition = profilePanelPosition;
@@ -34,6 +35,7 @@ public class PlayerProfile
         }
     }
 
+    public PlayerAchievements PlayerAchievements => _playerAchievements;
     public List<SavedGame> SavedGames => _savedGames;
 
     public int GamesPlayed => _gamesPlayed;

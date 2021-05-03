@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader _classInstance;
-    // public static SceneLoader Loader=> _classInstance;
  
     public static SceneLoader Loader
     {
@@ -23,7 +22,6 @@ public class SceneLoader : MonoBehaviour
             
             return _classInstance;
         }
- 
     }
 
     private void Awake()
