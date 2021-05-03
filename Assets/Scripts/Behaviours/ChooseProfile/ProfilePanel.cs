@@ -14,21 +14,21 @@ public class ProfilePanel : MonoBehaviour
     private GameObject _plusButton;
     private GameObject _profileInfo;
     private GameObject _buttonsPanel;
-    
+
     private GameObject _createProfilePanel;
     private GameObject _createProfileNameInput;
     private GameObject _createProfileErrorTextBox;
-    
+
 
     private void Awake()
     {
         _profilePanelPosition = gameObject.transform.GetSiblingIndex();
         _playerProfile = Database.GameData.FindPlayerByPanelPosition(_profilePanelPosition);
-        
+
         _plusButton = gameObject.transform.Find("InfoPanel/PlusButton").gameObject;
         _profileInfo = gameObject.transform.Find("InfoPanel/ProfileInfo").gameObject;
         _buttonsPanel = gameObject.transform.Find("ButtonsPanel").gameObject;
-        
+
         _createProfilePanel = gameObject.transform.Find("InfoPanel/CreateProfile").gameObject;
         _createProfileNameInput = _createProfilePanel.transform.Find("Input/NameInput").gameObject;
         _createProfileErrorTextBox = _createProfilePanel.transform.Find("ErrorText").gameObject;
@@ -47,7 +47,7 @@ public class ProfilePanel : MonoBehaviour
         }
     }
 
-    
+
     private void ShowCreateProfileScreen()
     {
         _plusButton.SetActive(true);
@@ -55,18 +55,21 @@ public class ProfilePanel : MonoBehaviour
         _buttonsPanel.SetActive(false);
         _createProfilePanel.SetActive(false);
     }
-    
+
     private void ShowProfileInfoScreen()
     {
         _plusButton.SetActive(false);
         _profileInfo.SetActive(true);
         _buttonsPanel.SetActive(true);
         _createProfilePanel.SetActive(false);
-        
-        _profileInfo.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>().text = $"Name: {_playerProfile.PlayerName}";
-        // _profileInfo.transform.Find("Score").GetComponent<TextMeshProUGUI>().text = $"Highest Score: {_playerProfile}";
+
+        _profileInfo.transform.Find("PlayerName").GetComponent<TextMeshProUGUI>().text =
+            $"Name: {_playerProfile.PlayerName}";
+        _profileInfo.transform.Find("Score").GetComponent<TextMeshProUGUI>().text =
+            $"Highest Score: {_playerProfile.HighestScore}";
+        _profileInfo.transform.Find("Achievements").GetComponent<TextMeshProUGUI>().text =
+            $"Achievement Points: {_playerProfile.PlayerAchievements.TotalAchievementPoints()}";
         // _profileInfo.transform.Find("PlayedTime").GetComponent<TextMeshProUGUI>().text = $"Name: {_playerProfile.PlayerName}";
-        // _profileInfo.transform.Find("Achievements").GetComponent<TextMeshProUGUI>().text = $"Name: {_playerProfile.PlayerName}";
     }
 
 
@@ -115,12 +118,11 @@ public class ProfilePanel : MonoBehaviour
     {
         Database.GameData.DeleteProfile(_playerProfile);
         ShowCreateProfileScreen();
-        
     }
 
     public void PlayButtonClicked()
     {
         Database.GameData.LogIn(_playerProfile);
-        SceneLoader.Loader.LoadScene("MainMenu");   
+        SceneLoader.Loader.LoadScene("MainMenu");
     }
 }

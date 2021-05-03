@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PlayerProfile
     private string _name;
     private int _gamesPlayed;
     private int _totalTilesDestroyed;
+    private int _highestScore;
     
     private int _profilePanelPosition; // which panel was this account created in
 
@@ -20,6 +22,7 @@ public class PlayerProfile
         _playerAchievements = new PlayerAchievements();
         _gamesPlayed = 0;
         _totalTilesDestroyed = 0;
+        _highestScore = 0;
         _name = playerName;
         _profilePanelPosition = profilePanelPosition;
     }
@@ -31,6 +34,7 @@ public class PlayerProfile
 
     public void EndedGame(int score, List<GameChange> gameReplayData)
     {
+        _highestScore = Math.Max(_highestScore, score);
         if (Database.GameData.IsNewHighScore(score))
         {
             Debug.Log("Saving new high score and Game Data: " + score + ", " + gameReplayData.Count);
@@ -43,6 +47,8 @@ public class PlayerProfile
         get => _totalTilesDestroyed;
         set => _totalTilesDestroyed = value;
     }
+
+    public int HighestScore => _highestScore;
 
     public PlayerAchievements PlayerAchievements => _playerAchievements;
     public List<SavedGame> SavedGames => _savedGames;
