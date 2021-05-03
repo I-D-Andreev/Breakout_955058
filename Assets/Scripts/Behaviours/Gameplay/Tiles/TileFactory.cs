@@ -23,7 +23,6 @@ public class TileFactory
 
 
     private List<Func<int>> _tileCreationMethods;
-    private GameChangeMonitor _gameChangeMonitor;
 
     public TileFactory(float tilePadding, float worldPaddingTop, float worldPaddingSide) : this("Prefabs/Gameplay/Tile",
         tilePadding, worldPaddingTop, worldPaddingSide)
@@ -33,7 +32,6 @@ public class TileFactory
     public TileFactory(string prefabPath, float tilePadding, float worldPaddingTop, float worldPaddingSide)
     {
         _tilePrefab = Resources.Load<GameObject>(prefabPath);
-        _gameChangeMonitor = new GameChangeMonitor();
 
         (float tileWidth, float tileHeight) = CalculateWidthHeight();
 
@@ -155,8 +153,10 @@ public class TileFactory
 
     private void CreateTile(float posX, float posY)
     {
+        // We can set Time=0, as the List of GameChanges is in order of time (and previous elements will block).
+        // Setting this time to 0 will make Tile Rendering to appear as soon as possible.
         int numStrikesToDisappear = Random.Range(1, 3 + 1);
-        _gameChangeMonitor.SaveAndMakeGameChange(
+        GameChangeMonitor.SaveAndMakeGameChange(
             new TileCreateChange(0, posX, posY, numStrikesToDisappear),
             _tilePrefab);
     }

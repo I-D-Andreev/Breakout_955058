@@ -10,12 +10,10 @@ public class BallMovement2D : MonoBehaviour
     [SerializeField] private float speed = 1;
     [SerializeField] private Vector2 movement = new Vector2(-1, 1);
     private Rigidbody2D _rigidbody2D;
-    private GameChangeMonitor _gameChangeMonitor;
     
     private void Awake()
     {
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        _gameChangeMonitor = new GameChangeMonitor();
     }
 
     private void Start()
@@ -37,6 +35,6 @@ public class BallMovement2D : MonoBehaviour
         }
 
         var position = gameObject.transform.position;
-        _gameChangeMonitor.SaveGameChange(new BallPositionChange(Time.timeSinceLevelLoad, position.x, position.y));
+        GameChangeMonitor.SaveGameChange(new BallPositionChange(Time.timeSinceLevelLoad, position.x, position.y));
     }
 }
