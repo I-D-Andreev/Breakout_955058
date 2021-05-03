@@ -5,10 +5,12 @@ using UnityEngine;
 public class GameEnd : MonoBehaviour
 {
     private ScoreUpdater _scoreUpdater;
+    private GameChangeMonitor _gameChangeMonitor;
     
     private void Awake()
     {
         _scoreUpdater = GameObject.Find("ScoreValue").GetComponent<ScoreUpdater>();
+        _gameChangeMonitor = new GameChangeMonitor();
         BottomWallHit.BottomWallHitEvent.AddListener(CheckGameEnd);
     }
     
@@ -16,7 +18,8 @@ public class GameEnd : MonoBehaviour
     {
         if (obj.CompareTag("Ball"))
         {
-            Destroy(obj);
+            _gameChangeMonitor.SaveAndMakeGameChange(new BallDeathChange(Time.timeSinceLevelLoad), obj);
+            
             UpdateGameData();
         }
     }
