@@ -155,10 +155,10 @@ public class TileFactory
 
     private void CreateTile(float posX, float posY)
     {
+        int numStrikesToDisappear = Random.Range(1, 3 + 1);
         _gameChangeMonitor.SaveAndMakeGameChange(
-            new TileCreateChange(Time.timeSinceLevelLoad, new Vector3(posX, posY, 0)),
+            new TileCreateChange(Time.timeSinceLevelLoad, new Vector3(posX, posY, 0), numStrikesToDisappear),
             _tilePrefab);
-        // GameObject.Instantiate(_tilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
     }
 
 

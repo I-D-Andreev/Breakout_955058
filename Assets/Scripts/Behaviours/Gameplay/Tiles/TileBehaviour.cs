@@ -4,7 +4,9 @@ using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class TileDestroyEvent : UnityEvent<TileBehaviour> {}
+public class TileDestroyEvent : UnityEvent<TileBehaviour>
+{
+}
 
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -12,16 +14,15 @@ public class TileBehaviour : MonoBehaviour
 {
     public static TileDestroyEvent TileDestroyEvent = new TileDestroyEvent();
 
+
     private SpriteRenderer _spriteRenderer;
-    
+
     private int _numStrikesToDisappear;
     private int _numStrikesLeft;
- 
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        NumStrikesToDisappear = Random.Range(1, 3+1);
-        // NumStrikesToDisappear = 1; use for faster debug
     }
 
     public void OnCollisionExit2D(Collision2D other)
@@ -37,7 +38,7 @@ public class TileBehaviour : MonoBehaviour
     public int NumStrikesToDisappear
     {
         get => _numStrikesToDisappear;
-        private set
+        set
         {
             _numStrikesToDisappear = value;
             NumStrikesLeft = _numStrikesToDisappear;
@@ -57,7 +58,7 @@ public class TileBehaviour : MonoBehaviour
     private void NumStrikesLeftChanged()
     {
         Color color;
-        
+
         switch (NumStrikesLeft)
         {
             case 3:
