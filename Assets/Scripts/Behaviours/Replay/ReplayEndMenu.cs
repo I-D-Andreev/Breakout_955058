@@ -20,7 +20,7 @@ public class ReplayEndMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        _newHighScore.SetActive(CurrentReplayData.isNewHighScore);
+        _newHighScore.SetActive(CurrentReplayData.IsNewHighScore);
         _scoreBox.text = $"Score: {_scoreValueBox.text}";
     }
 

@@ -27,7 +27,7 @@ public class GameEnd : MonoBehaviour
     private void UpdateGameData()
     {
         CurrentReplayData.ReplayData = GameChangeMonitor.GameChanges;
-        CurrentReplayData.isNewHighScore = Database.GameData.IsNewHighScore(_scoreUpdater.Score);
+        CurrentReplayData.IsNewHighScore = Database.GameData.IsNewHighScore(_scoreUpdater.Score);
         
         Database.GameData.LoggedInProfile.EndedGame(_scoreUpdater.Score, GameChangeMonitor.GameChanges);
         GameChangeMonitor.NullifyGameChangeData();

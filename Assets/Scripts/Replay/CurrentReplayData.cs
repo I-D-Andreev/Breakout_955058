@@ -3,5 +3,5 @@
 public class CurrentReplayData
 {
     public static List<GameChange> ReplayData { get; set; } = new List<GameChange>();
-    public static bool isNewHighScore = false;
+    public static bool IsNewHighScore = false;
 }
