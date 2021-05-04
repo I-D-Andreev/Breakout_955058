@@ -31,12 +31,6 @@ public class MainMenuManager : MonoBehaviour
         SceneLoader.Loader.LoadScene("ChooseProfile");
     }
 
-    public void Credits()
-    {
-        Debug.Log("Credits");
-    }
-
-
     public void ExitGame()
     {
         Application.Quit();

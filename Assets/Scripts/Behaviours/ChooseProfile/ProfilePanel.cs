@@ -123,6 +123,6 @@ public class ProfilePanel : MonoBehaviour
     public void PlayButtonClicked()
     {
         Database.GameData.LogIn(_playerProfile);
-        SceneLoader.Loader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadSceneFade("MainMenu");
     }
 }
