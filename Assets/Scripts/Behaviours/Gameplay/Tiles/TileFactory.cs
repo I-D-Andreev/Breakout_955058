@@ -104,9 +104,9 @@ public class TileFactory
 
     public int CreateTilesColumns()
     {
-        // If the number of possible columns is not an even number, we will not fill in the last one.
+        // If the number of possible columns is an even number, we will not fill in the last one.
         // In such a case, offset the tiles with half a tile more.
-        float additionalOffset = (_possibleColumns % 2) * (_tileWidthPadded / 2);
+        float additionalOffset = _possibleColumns % 2 == 0 ? _tileWidthPadded / 2 : 0;
 
         float tilePositionX =
             _startWidth + _widthOffset + additionalOffset + _tileWidthPadded / 2; // as tiles are rendered from middle
