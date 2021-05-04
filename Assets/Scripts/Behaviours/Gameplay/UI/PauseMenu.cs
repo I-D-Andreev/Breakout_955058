@@ -17,7 +17,6 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitToMenu()
     {
-        // todo1: take score, recording?, etc
         Time.timeScale = 1;
         SceneLoader.Loader.LoadScene("MainMenu");
     }
