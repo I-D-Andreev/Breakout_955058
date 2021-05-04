@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class StartBallMovementTutorialEvent : TutorialEvent
+public class SetBallMovementTutorialEvent : TutorialEvent
 {
     private GameObject _ball;
     private float _speed;
     
-    public StartBallMovementTutorialEvent(GameObject ball, float speed = 2.3f)
+    public SetBallMovementTutorialEvent(GameObject ball, float speed = 2.3f)
     {
         _ball = ball;
         _speed = speed;
