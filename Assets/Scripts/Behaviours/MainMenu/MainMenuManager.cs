@@ -13,22 +13,22 @@ public class MainMenuManager : MonoBehaviour
     
     public void Tutorial()
     {
-        SceneLoader.Loader.LoadScene("Tutorial");
+        SceneLoader.Loader.LoadSceneFade("Tutorial");
     }
 
     public void TopScores()
     {
-        SceneLoader.Loader.LoadScene("Scores");
+        SceneLoader.Loader.LoadSceneFade("Scores");
     }
 
     public void Achievements()
     {
-        SceneLoader.Loader.LoadScene("Achievements");
+        SceneLoader.Loader.LoadSceneFade("Achievements");
     }
 
     public void SwitchProfile()
     {
-        SceneLoader.Loader.LoadScene("ChooseProfile");
+        SceneLoader.Loader.LoadSceneFade("ChooseProfile");
     }
 
     public void ExitGame()

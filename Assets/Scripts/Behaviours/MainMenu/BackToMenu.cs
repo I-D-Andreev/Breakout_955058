@@ -7,6 +7,6 @@ public class BackToMenu : MonoBehaviour
 {
     public void BackToMainMenu()
     {
-        SceneLoader.Loader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadSceneFade("MainMenu");
     }
 }

@@ -26,6 +26,6 @@ public class ReplayEndMenu : MonoBehaviour
 
     public void BackToMenuClicked()
     {
-        SceneLoader.Loader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadSceneFade("MainMenu");
     }
 }

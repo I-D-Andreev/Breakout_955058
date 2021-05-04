@@ -53,6 +53,6 @@ public class GameEndMenu : MonoBehaviour
     public void QuitToMenuButtonClicked()
     {
         Time.timeScale = 1;
-        SceneLoader.Loader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadSceneFade("MainMenu");
     }
 }

@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
     public void QuitToMenu()
     {
         Time.timeScale = 1;
-        SceneLoader.Loader.LoadScene("MainMenu");
+        SceneLoader.Loader.LoadSceneFade("MainMenu");
     }
   
     public void OnPause(InputValue _)
