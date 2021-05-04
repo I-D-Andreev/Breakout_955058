@@ -20,7 +20,7 @@ public class TotalTilesAchievement: Achievement
 
     public override string AchievementText()
     {
-        return $"Destroy a total of {_tilesNeeded} tiles.";
+        return $"Destroy a total of {_tilesNeeded} tiles";
     }
 
     public void TryAchieve(int tiles)

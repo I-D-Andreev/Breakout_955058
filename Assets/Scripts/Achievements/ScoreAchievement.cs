@@ -19,7 +19,7 @@ public class ScoreAchievement : Achievement
 
     public override string AchievementText()
     {
-        return $"Achieve a score of {_scoreNeeded}.";
+        return $"Achieve a score of {_scoreNeeded}";
     }
 
     public void TryAchieve(int score)
