@@ -15,7 +15,7 @@ public class ShowHideTutorialTextEvent : TutorialEvent
 
     public override bool TryExecuteEvent()
     {
-        _tutorialBox.SetActive(_shouldShow);
+        _tutorialBox.GetComponent<CanvasGroup>().alpha = (_shouldShow ? 1 : 0);
         return true;
     }
 }

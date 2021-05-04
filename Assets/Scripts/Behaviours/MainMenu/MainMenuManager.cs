@@ -13,7 +13,7 @@ public class MainMenuManager : MonoBehaviour
     
     public void Tutorial()
     {
-        Debug.Log("Tutorial");
+        SceneLoader.Loader.LoadScene("Tutorial");
     }
 
     public void TopScores()
