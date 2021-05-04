@@ -21,6 +21,11 @@ public class MainMenuManager : MonoBehaviour
         SceneLoader.Loader.LoadScene("Scores");
     }
 
+    public void Achievements()
+    {
+        SceneLoader.Loader.LoadScene("Achievements");
+    }
+
     public void SwitchProfile()
     {
         SceneLoader.Loader.LoadScene("ChooseProfile");

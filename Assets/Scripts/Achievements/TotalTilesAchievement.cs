@@ -12,10 +12,15 @@ public class TotalTilesAchievement: Achievement
         _tilesNeeded = tilesNeeded;
     }
 
-    public override string AchievementText()
+    public override string AchievementEarnedText()
     {
         return $"You destroyed a total of {_tilesNeeded} tiles!\nYou earned +{AchievementPoints} points!";
 
+    }
+
+    public override string AchievementText()
+    {
+        return $"Destroy a total of {_tilesNeeded} tiles.";
     }
 
     public void TryAchieve(int tiles)

@@ -66,7 +66,7 @@ public class AchievementsManager : MonoBehaviour
     {
         CanvasGroup canvasGroup = achievementPrefab.GetComponent<CanvasGroup>();
         achievementPrefab.transform.Find("AchievementText").gameObject.GetComponent<TextMeshProUGUI>().text =
-            achievement.AchievementText();
+            achievement.AchievementEarnedText();
 
         canvasGroup.alpha = 1;
         

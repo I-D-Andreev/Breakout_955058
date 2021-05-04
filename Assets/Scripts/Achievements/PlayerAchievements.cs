@@ -7,11 +7,15 @@ public class PlayerAchievements
 {
     private List<ScoreAchievement> _scoreAchievements;
     private List<TotalTilesAchievement> _totalTilesAchievements;
-
+    private List<Achievement> _allAchievements;
+    
     public PlayerAchievements()
     {
         CreateScoreAchievements();
         CreateTotalTilesAchievements();
+        
+        // Must be after the others;
+        CreateAllAchievements();
     }
 
     private void CreateScoreAchievements()
@@ -39,19 +43,18 @@ public class PlayerAchievements
             _totalTilesAchievements.Add(new TotalTilesAchievement(tilesPointsTuples[i].Item2, tilesPointsTuples[i].Item1));
         }
     }
+    
+    public void CreateAllAchievements()
+    {
+        _allAchievements = new List<Achievement>();
+        _allAchievements.AddRange(_scoreAchievements);
+        _allAchievements.AddRange(_totalTilesAchievements);
+    }
 
     public int TotalAchievementPoints()
     {
         int points = 0;
-        foreach (var achievement in _scoreAchievements)
-        {
-            if (achievement.IsAchieved)
-            {
-                points += achievement.AchievementPoints;
-            }
-        }
-        
-        foreach (var achievement in _totalTilesAchievements)
+        foreach (var achievement in _allAchievements)
         {
             if (achievement.IsAchieved)
             {
@@ -65,4 +68,6 @@ public class PlayerAchievements
 
     public List<ScoreAchievement> ScoreAchievements => _scoreAchievements;
     public List<TotalTilesAchievement> TotalTileAchievements => _totalTilesAchievements;
+
+    public List<Achievement> AllAchievements => _allAchievements;
 }

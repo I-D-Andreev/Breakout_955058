@@ -29,5 +29,6 @@ public abstract class Achievement
         AchievementsManager.Manager.ShowAchievement(this);
     }
 
+    public abstract string AchievementEarnedText();
     public abstract string AchievementText();
 }
