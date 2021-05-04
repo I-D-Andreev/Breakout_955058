@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameChangeMonitor
 {
     private static List<GameChange> _changes = new List<GameChange>();
-    private static bool _isLocked;
+    private static bool _isLocked = false;
     
     public static void SaveAndMakeGameChange(GameChange gameChange, GameObject gameObject)
     {
