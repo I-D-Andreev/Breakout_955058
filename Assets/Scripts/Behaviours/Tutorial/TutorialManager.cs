@@ -16,11 +16,14 @@ public class BoolWrapper
     }
 }
 
+[RequireComponent(typeof(TutorialTileManager))]
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialText;
     [SerializeField] private GameObject ball;
     
+    private TutorialTileManager _tutorialTileManager;
+
     private TextMeshProUGUI _infoTextBox;
     private TextMeshProUGUI _commandTextBox;
     
@@ -31,6 +34,7 @@ public class TutorialManager : MonoBehaviour
     
     private void Awake()
     {
+        _tutorialTileManager = gameObject.GetComponent<TutorialTileManager>();
         _paddleHit = new BoolWrapper(false);
         BallEvents.BallHitsPaddleEvent.AddListener(PaddleWasHit);
         
@@ -38,7 +42,12 @@ public class TutorialManager : MonoBehaviour
         _commandTextBox = tutorialText.transform.Find("Panel/CommandText").GetComponent<TextMeshProUGUI>();
 
         _currentIndex = 0;
-        _events = new List<TutorialEvent>
+        _events = CreateTutorialEvents();
+    }
+
+    private List<TutorialEvent> CreateTutorialEvents()
+    {
+        return new List<TutorialEvent>
         {
             new SetTextTutorialEvent(_infoTextBox, _commandTextBox,
                 "Welcome to the Tutorial!", 
@@ -80,11 +89,48 @@ public class TutorialManager : MonoBehaviour
             
             new WaitSecondsTutorialEvent(1),
             new SetBallMovementTutorialEvent(ball, 0),
+            
+            
+            new CreateTilesTutorialEvent(_tutorialTileManager.TileFactory.CreateTilesRect),
+            new SetTextTutorialEvent(_infoTextBox, _commandTextBox,
+                "You should use the ball to hit the provided tiles!", 
+                "Press the Space Key to Continue!"),
             new ShowHideTutorialTextEvent(tutorialText, true),
+            new WaitKeyPressTutorialEvent(Key.Space),
+            
+            new SetTextTutorialEvent(_infoTextBox, _commandTextBox,
+                "The tiles may appear in a Rectangle form as shown now!", 
+                "Press the Space Key to Continue!"),
+            new WaitKeyPressTutorialEvent(Key.Space),
+            
+            
+            new DestroyTilesTutorialEvent(),
+            new CreateTilesTutorialEvent(_tutorialTileManager.TileFactory.CreateTilesMosaic),
+            new SetTextTutorialEvent(_infoTextBox, _commandTextBox,
+                "Or they may appear in a Mosaic form!", 
+                "Press the Space Key to Continue!"),
+            new WaitKeyPressTutorialEvent(Key.Space),
+            
 
+            new DestroyTilesTutorialEvent(),
+            new CreateTilesTutorialEvent(_tutorialTileManager.TileFactory.CreateTilesColumns),
+            new SetTextTutorialEvent(_infoTextBox, _commandTextBox,
+                "Or in Columns!", 
+                "Press the Space Key to Continue!"),
+            new WaitKeyPressTutorialEvent(Key.Space),
+
+            
+            new DestroyTilesTutorialEvent(),
+            new CreateTilesTutorialEvent(_tutorialTileManager.TileFactory.CreateTilesRandomRect),
+            new SetTextTutorialEvent(_infoTextBox, _commandTextBox,
+                "Or in a Random Shape!", 
+                "Press the Space Key to Continue!"),
+            new WaitKeyPressTutorialEvent(Key.Space),
+            
         };
-    }
 
+    }
+    
     private void PaddleWasHit()
     {
         Debug.Log("Paddle was hit");

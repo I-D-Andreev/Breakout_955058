@@ -64,7 +64,7 @@ public class TileFactory
     }
 
 
-    private int CreateTilesRect()
+    public int CreateTilesRect()
     {
         float tilePositionX = _startWidth + _widthOffset + _tileWidthPadded / 2; // as tiles are rendered from middle
         float tilePositionY = _startHeight;
@@ -82,7 +82,7 @@ public class TileFactory
         return tilesCount;
     }
 
-    private int CreateTilesMosaic()
+    public int CreateTilesMosaic()
     {
         float tilePositionX = _startWidth + _widthOffset + _tileWidthPadded / 2; // as tiles are rendered from middle
         float tilePositionY = _startHeight;
@@ -102,7 +102,7 @@ public class TileFactory
         return tilesCount;
     }
 
-    private int CreateTilesColumns()
+    public int CreateTilesColumns()
     {
         // If the number of possible columns is not an even number, we will not fill in the last one.
         // In such a case, offset the tiles with half a tile more.
@@ -127,7 +127,7 @@ public class TileFactory
         return tilesCount;
     }
 
-    private int CreateTilesRandomRect()
+    public int CreateTilesRandomRect()
     {
         float tilePositionX = _startWidth + _widthOffset + _tileWidthPadded / 2; // as tiles are rendered from middle
         float tilePositionY = _startHeight;
@@ -151,7 +151,7 @@ public class TileFactory
         return tilesCount;
     }
 
-    private void CreateTile(float posX, float posY)
+    public void CreateTile(float posX, float posY)
     {
         // We can set Time=0, as the List of GameChanges is in order of time (and previous elements will block).
         // Setting this time to 0 will make Tile Rendering to appear as soon as possible.
