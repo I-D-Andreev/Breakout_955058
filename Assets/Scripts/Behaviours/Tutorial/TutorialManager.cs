@@ -5,6 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// So that a boolean value can be passed by reference.
+public class BoolWrapper
+{
+    public bool Value;
+
+    public BoolWrapper(bool v)
+    {
+        Value = v;
+    }
+}
+
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialText;
@@ -12,13 +23,17 @@ public class TutorialManager : MonoBehaviour
     
     private TextMeshProUGUI _infoTextBox;
     private TextMeshProUGUI _commandTextBox;
-
-
+    
     private List<TutorialEvent> _events;
     private int _currentIndex;
 
+    private BoolWrapper _paddleHit;
+    
     private void Awake()
     {
+        _paddleHit = new BoolWrapper(false);
+        BallEvents.BallHitsPaddleEvent.AddListener(PaddleWasHit);
+        
         _infoTextBox = tutorialText.transform.Find("InfoText").GetComponent<TextMeshProUGUI>();
         _commandTextBox = tutorialText.transform.Find("Panel/CommandText").GetComponent<TextMeshProUGUI>();
 
@@ -58,14 +73,23 @@ public class TutorialManager : MonoBehaviour
                 "Press the Space Key to Continue!"),
             new WaitKeyPressTutorialEvent(Key.Space),
             
-            new StartBallMovementTutorialEvent(ball),
+            new SetBallMovementTutorialEvent(ball),
+            
+            new ShowHideTutorialTextEvent(tutorialText, false),
+            new WaitBallHitTileTutorialEvent(_paddleHit),
+            
+            new WaitSecondsTutorialEvent(1),
+            new SetBallMovementTutorialEvent(ball, 0),
+            new ShowHideTutorialTextEvent(tutorialText, true),
 
-            
-            
-            
         };
     }
 
+    private void PaddleWasHit()
+    {
+        Debug.Log("Paddle was hit");
+        _paddleHit.Value = true;
+    }
 
     private void Update()
     {
@@ -73,6 +97,7 @@ public class TutorialManager : MonoBehaviour
         {
             Debug.Log($"Event {_currentIndex} done!");
             _currentIndex++;
+            if (_currentIndex == _events.Count) Debug.Log("Finished");
         }
     }
 }
