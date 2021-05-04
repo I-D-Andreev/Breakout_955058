@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DebugManager {
-    public static bool DEBUG = true;
+    public static bool DEBUG = false;
 }
