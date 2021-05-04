@@ -13,7 +13,6 @@ public class TutorialTileManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Tutorial tile manager awoken");
         _tileFactory = new TileFactory(tilePadding, worldPaddingTop, worldPaddingSide);
     }
 

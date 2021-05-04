@@ -96,9 +96,7 @@ public class TileFactory
                 tilesCount++;
             }
         }
-
-        Debug.Log("Total tiles: " + tilesCount);
-
+        
         return tilesCount;
     }
 
@@ -121,9 +119,7 @@ public class TileFactory
                 tilesCount++;
             }
         }
-
-        Debug.Log("Total tiles: " + tilesCount);
-
+        
         return tilesCount;
     }
 
@@ -145,9 +141,7 @@ public class TileFactory
                 }
             }
         }
-
-        Debug.Log("Total tiles: " + tilesCount);
-
+        
         return tilesCount;
     }
 
