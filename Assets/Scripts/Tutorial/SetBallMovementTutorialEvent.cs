@@ -6,20 +6,18 @@ using UnityEngine;
 public class SetBallMovementTutorialEvent : TutorialEvent
 {
     private GameObject _ball;
-    private float _speed;
+    private Vector2 _direction;
+    private const float DefaultBallSpeed = 2.3f;
     
-    public SetBallMovementTutorialEvent(GameObject ball, float speed = 2.3f)
+    public SetBallMovementTutorialEvent(GameObject ball, Vector2 direction)
     {
         _ball = ball;
-        _speed = speed;
+        _direction = direction;
     }
     
     public override bool TryExecuteEvent()
     {
-        BallMovement2D ballMovement = _ball.GetComponent<BallMovement2D>();
-        ballMovement.speed = _speed;
-        ballMovement.InitBall();
-        
+        _ball.GetComponent<Rigidbody2D>().velocity = _direction * DefaultBallSpeed;
         return true;
     }
 }

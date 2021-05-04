@@ -90,7 +90,7 @@ public class TileFactory
         int tilesCount = 0;
         for (int i = 0; i < _possibleRows; i++)
         {
-            for (int start = i % 2, j = start; j < _possibleColumns - start; j += 2)
+            for (int start = i % 2, j = start; j < _possibleColumns; j += 2)
             {
                 CreateTile(tilePositionX + j * _tileWidthPadded, tilePositionY - i * _tileHeightPadded);
                 tilesCount++;

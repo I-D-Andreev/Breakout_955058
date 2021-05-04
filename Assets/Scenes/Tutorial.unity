@@ -3244,6 +3244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialText: {fileID: 1492966025}
+  scoreText: {fileID: 986754282}
   ball: {fileID: 2075596987}
 --- !u!4 &1793164907
 Transform:

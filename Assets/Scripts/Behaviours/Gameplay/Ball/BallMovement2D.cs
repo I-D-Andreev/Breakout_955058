@@ -18,13 +18,9 @@ public class BallMovement2D : MonoBehaviour
 
     private void Start()
     {
-        InitBall();
-    }
-
-    public void InitBall()
-    {
         _rigidbody2D.velocity = movement * speed;
     }
+
 
     private void Update()
     {
