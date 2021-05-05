@@ -37,6 +37,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
+        AchievementsManager.ShouldMonitor = false;
         GameChangeMonitor.ShouldMonitor = false;
     }
 

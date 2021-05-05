@@ -14,6 +14,9 @@ public class GameReplayManager : MonoBehaviour
     
     private void Awake()
     {
+        AchievementsManager.ShouldMonitor = false;
+        GameChangeMonitor.ShouldMonitor = false;
+        
         _gameReplay = new GameReplay(CurrentReplayData.ReplayData, paddle, ball, exampleTile);
         
     }

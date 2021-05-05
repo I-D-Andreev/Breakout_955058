@@ -6,6 +6,7 @@ using UnityEngine;
 public class AchievementsManager : MonoBehaviour
 {
     private static AchievementsManager _classInstance;
+    public static bool ShouldMonitor = false;
 
     [SerializeField] private GameObject achievementPrefab;
     
@@ -47,18 +48,24 @@ public class AchievementsManager : MonoBehaviour
 
     private void CheckScoreAchievements(int score)
     {
-        foreach (ScoreAchievement achievement in GetLoggedInProfile().PlayerAchievements.ScoreAchievements)
+        if (ShouldMonitor)
         {
-            achievement.TryAchieve(score);
+            foreach (ScoreAchievement achievement in GetLoggedInProfile().PlayerAchievements.ScoreAchievements)
+            {
+                achievement.TryAchieve(score);
+            }
         }
     }
 
     private void CheckTotalTilesAchievements(TileBehaviour _)
     {
-        GetLoggedInProfile().TotalTilesDestroyed++;
-        foreach (TotalTilesAchievement achievement in GetLoggedInProfile().PlayerAchievements.TotalTileAchievements)
+        if (ShouldMonitor)
         {
-            achievement.TryAchieve(GetLoggedInProfile().TotalTilesDestroyed);
+            GetLoggedInProfile().TotalTilesDestroyed++;
+            foreach (TotalTilesAchievement achievement in GetLoggedInProfile().PlayerAchievements.TotalTileAchievements)
+            {
+                achievement.TryAchieve(GetLoggedInProfile().TotalTilesDestroyed);
+            }
         }
     }
 
