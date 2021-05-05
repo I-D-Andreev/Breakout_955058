@@ -17,9 +17,12 @@ public class TileManager : MonoBehaviour
     private void Awake()
     {
         _tileFactory = new TileFactory(tilePadding, worldPaddingTop, worldPaddingSide);
-        _tilesCount = _tileFactory.CreateTiles();
-        
         TileBehaviour.TileDestroyEvent.AddListener(TilesLeft);
+    }
+
+    private void Start()
+    {
+        _tilesCount = _tileFactory.CreateTiles();
     }
 
     private void TilesLeft(TileBehaviour _)

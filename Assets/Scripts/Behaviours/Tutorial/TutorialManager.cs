@@ -35,6 +35,11 @@ public class TutorialManager : MonoBehaviour
 
     private BoolWrapper _paddleHit;
 
+    private void Awake()
+    {
+        GameChangeMonitor.ShouldMonitor = false;
+    }
+
     private void Start()
     {
         _tutorialTileManager = gameObject.GetComponent<TutorialTileManager>();

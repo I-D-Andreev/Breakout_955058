@@ -14,6 +14,7 @@ public class GameStart : MonoBehaviour
         _paddle = GameObject.Find("Paddle");
         _ball = GameObject.Find("Ball");
 
+        GameChangeMonitor.ShouldMonitor = true;
         var paddlePos = _paddle.transform.position;
         GameChangeMonitor.SaveGameChange(new PaddlePositionChange(0, paddlePos.x, paddlePos.y));
 

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
 
     public void StartGame()
     {
