@@ -23,6 +23,7 @@ public class TutorialEndMenu : MonoBehaviour
     {
         if (obj.CompareTag("Ball"))
         {
+            Destroy(obj);
             ShowMenu();
         }
     }
