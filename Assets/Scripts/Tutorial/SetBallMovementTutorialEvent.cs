@@ -4,7 +4,7 @@ public class SetBallMovementTutorialEvent : TutorialEvent
 {
     private GameObject _ball;
     private Vector2 _direction;
-    private const float DefaultBallSpeed = 2.3f;
+    private const float DefaultBallSpeed = 2.5f;
     
     public SetBallMovementTutorialEvent(GameObject ball, Vector2 direction)
     {
