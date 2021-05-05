@@ -41,13 +41,13 @@ public class GameEndMenu : MonoBehaviour
     public void NewGameButtonClicked()
     {
         Time.timeScale = 1;
-        SceneLoader.Loader.LoadScene("Gameplay");
+        SceneLoader.Loader.LoadSceneFade("Gameplay");
     }
 
     public void ReplayButtonClicked()
     {
         Time.timeScale = 1;
-        SceneLoader.Loader.LoadScene("GameReplay");
+        SceneLoader.Loader.LoadSceneFade("GameReplay");
 
     }
     public void QuitToMenuButtonClicked()

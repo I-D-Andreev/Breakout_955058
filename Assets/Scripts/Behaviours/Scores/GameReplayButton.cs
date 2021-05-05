@@ -11,6 +11,6 @@ public class GameReplayButton : MonoBehaviour
     {
         CurrentReplayData.ReplayData = GameChanges;
         CurrentReplayData.IsNewHighScore = true;
-        SceneLoader.Loader.LoadScene("GameReplay");
+        SceneLoader.Loader.LoadSceneFade("GameReplay");
     }
 }
